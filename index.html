@@ -1,1263 +1,809 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Somapuram Uday — Full-Stack Engineer. Frontend-core, Flask/Python backend, MERN stack, Tableau & data analytics. Final-year CSE at GPREC, Kurnool. Open to work.">
-  <meta name="keywords" content="Somapuram Uday, Full Stack Developer, React, Flask, Python, MERN, Tableau, Data Analytics, GPREC, Kurnool, Open Source, Frontend Engineer">
-  <meta name="author" content="Somapuram Uday">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://udaycodespace.github.io/">
-  <meta property="og:title" content="Somapuram Uday — Full-Stack Engineer">
-  <meta property="og:description" content="Builds interfaces. Wires APIs. Ships end to end.">
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="Somapuram Uday — Full-Stack Engineer">
-  <meta property="twitter:description" content="Frontend-core. Knows backend. Speaks data.">
-  <title>Somapuram Uday — Full-Stack Engineer</title>
-  <meta name="theme-color" content="#0a0a0a">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'acid': '#CCFF00',
-            'neo-bg': '#F4EFE6',
-            'neo-black': '#0a0a0a',
-            'neo-red': '#FF2A2A',
-            'neo-blue': '#1A6DFF',
-            'neo-orange': '#FF6B00',
-            'neo-pink': '#FF3CAC',
-            'neo-teal': '#00E5CC',
-            'neo-purple': '#7C3AED',
-          },
-          fontFamily: {
-            'display': ['"Bebas Neue"', 'cursive'],
-            'condensed': ['"Barlow Condensed"', 'sans-serif'],
-            'mono': ['"JetBrains Mono"', 'monospace'],
-          },
-          boxShadow: {
-            'brutal': '5px 5px 0px 0px #0a0a0a',
-            'brutal-sm': '3px 3px 0px 0px #0a0a0a',
-            'brutal-lg': '8px 8px 0px 0px #0a0a0a',
-            'brutal-xl': '12px 12px 0px 0px #0a0a0a',
-            'brutal-acid': '5px 5px 0px 0px #CCFF00',
-            'brutal-red': '5px 5px 0px 0px #FF2A2A',
-            'brutal-blue': '5px 5px 0px 0px #1A6DFF',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somapuram Uday — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root{
+    --ink:#0c0c10;          /* base ground */
+    --ink-2:#141419;        /* raised panel */
+    --paper:#f6f4ec;        /* off-white, used as text-on-color / light panels */
+    --muted:#84808f;        /* secondary text on dark */
+    --line: rgba(246,244,236,0.13);
+    --line-strong: rgba(246,244,236,0.28);
 
-    body {
-      cursor: none;
-      background-color: #F4EFE6;
-      background-image: radial-gradient(circle, rgba(10,10,10,0.12) 1px, transparent 1px);
-      background-size: 26px 26px;
-    }
+    --red:#ff3b2f;          /* signal / primary accent */
+    --blue:#2f5dff;         /* structure / links */
+    --yellow:#ffcf1f;       /* highlight / numerals */
+    --green:#28d17c;        /* status / positive */
 
-    #cursor {
-      pointer-events: none;
-      position: fixed;
-      z-index: 9999;
-      width: 18px; height: 18px;
-      background: #CCFF00;
-      border: 2px solid #0a0a0a;
-      transform: translate(-50%, -50%);
-      transition: width 0.12s, height 0.12s, background 0.12s, border-radius 0.12s;
-      mix-blend-mode: multiply;
-    }
-    #cursor.big { width: 52px; height: 52px; background: #0a0a0a; border-radius: 50%; }
-    #cursor.link { width: 40px; height: 40px; background: #FF2A2A; }
+    --display:'Bricolage Grotesque', 'Arial Black', sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
 
-    #progress-bar {
-      position: fixed; top: 0; left: 0;
-      height: 3px; background: #CCFF00;
-      border-right: 2px solid #0a0a0a;
-      z-index: 9998; width: 0%;
-    }
+    --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px; --space-6:104px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:auto; }
+  body{
+    background:var(--ink); color:var(--paper);
+    font-family:var(--mono);
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--red); color:var(--paper); }
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
 
-    .reveal {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.55s cubic-bezier(0.25,1,0.5,1), transform 0.55s cubic-bezier(0.25,1,0.5,1);
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+  /* ============ AMBIENT BACKGROUND ============ */
+  #bg-canvas{ position:fixed; inset:0; z-index:0; opacity:0.9; }
+  .grid-overlay{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 8.333%);
+    opacity:0.5;
+  }
+  .wrap{ position:relative; z-index:2; }
 
-    .marquee-wrap { overflow: hidden; white-space: nowrap; }
-    .marquee-track {
-      display: inline-flex; width: max-content;
-      animation: marquee 32s linear infinite;
-    }
-    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* ============ LAYOUT PRIMITIVES ============ */
+  .frame{ padding-left:5vw; padding-right:5vw; }
+  .rule{ border-top:1px solid var(--line-strong); }
 
-    .marquee-rev { display: inline-flex; width: max-content; animation: marquee-rev 28s linear infinite; }
-    @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  /* ============ HEADER ============ */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 5vw; font-size:12px; letter-spacing:0.03em;
+    mix-blend-mode:difference;
+  }
+  header .mark{ font-family:var(--display); font-weight:700; font-size:18px; }
+  header nav{ display:flex; gap:28px; }
+  header nav a{ text-decoration:none; color:var(--paper); opacity:0.7; transition:opacity .2s; }
+  header nav a:hover{ opacity:1; }
+  header .clock{ opacity:0.7; }
 
-    .skill-cell {
-      border-right: 2px solid rgba(255,255,255,0.12);
-      border-bottom: 2px solid rgba(255,255,255,0.12);
-      cursor: none;
-      transition: background 0s;
-    }
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end;
+    padding-top:18vh; padding-bottom:64px;
+  }
+  .hero-eyebrow{
+    display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted);
+    margin-bottom:28px; letter-spacing:0.04em;
+  }
+  .hero-eyebrow .dot{ width:8px; height:8px; background:var(--green); border-radius:50%; box-shadow:0 0 10px var(--green); }
+  h1.headline{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(3rem, 10vw, 9.5rem);
+    line-height:0.88; letter-spacing:-0.03em;
+    text-transform:uppercase;
+  }
+  h1.headline .row{ display:flex; align-items:baseline; gap:0.25em; overflow:hidden; }
+  h1.headline .row span.word{ display:inline-block; will-change:transform; }
+  h1.headline .accent{ color:var(--red); font-style:normal; -webkit-text-stroke:0; }
+  h1.headline .outline{ color:transparent; -webkit-text-stroke:2px var(--paper); }
 
-    .glitch:hover { animation: glitch 0.22s infinite; color: #FF2A2A; }
-    @keyframes glitch {
-      0%  { transform: translate(0); }
-      25% { transform: translate(-2px, 1px); }
-      50% { transform: translate(2px, -1px); }
-      75% { transform: translate(-1px, 2px); }
-      100%{ transform: translate(0); }
-    }
+  .hero-bottom{
+    display:grid; grid-template-columns:1.4fr 1fr; gap:60px; margin-top:56px; align-items:end;
+  }
+  .hero-sub{ font-size:1rem; line-height:1.85; color:#cdc9d8; max-width:52ch; }
+  .hero-sub strong{ color:var(--paper); font-weight:600; }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-start; }
+  .btn{
+    font-family:var(--mono); font-size:13px; font-weight:500; padding:15px 26px;
+    text-decoration:none; letter-spacing:0.02em; transition:transform .25s, background .25s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-fill{ background:var(--red); color:var(--ink); }
+  .btn-fill:hover{ transform:translateY(-2px); background:var(--yellow); }
+  .btn-line{ border:1px solid var(--line-strong); color:var(--paper); }
+  .btn-line:hover{ border-color:var(--paper); }
 
-    .tag {
-      display: inline-block;
-      background: #0a0a0a; color: #F4EFE6;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; font-weight: 700;
-      padding: 2px 8px; border: 1px solid #0a0a0a;
-      letter-spacing: 0.04em;
-    }
-    .tag-acid { background: #CCFF00; color: #0a0a0a; border-color: #0a0a0a; }
-    .tag-blue { background: #1A6DFF; color: white; border-color: #0a0a0a; }
+  /* ============ SECTION SYSTEM ============ */
+  section{ position:relative; padding:var(--space-6) 5vw; }
+  .sec-head{
+    display:grid; grid-template-columns:120px 1fr; gap:24px; align-items:start;
+    margin-bottom:var(--space-5);
+  }
+  .sec-tag{ font-size:12px; color:var(--muted); padding-top:10px; }
+  .sec-tag b{ color:var(--yellow); }
+  h2.sec-title{
+    font-family:var(--display); font-weight:600; font-size:clamp(2rem, 4.2vw, 3.6rem);
+    letter-spacing:-0.02em; line-height:1.05; max-width:18ch;
+  }
 
-    .exp-dot {
-      position: absolute; left: -11px; top: 12px;
-      width: 20px; height: 20px; border: 3px solid #0a0a0a;
-    }
+  /* ============ ABOUT ============ */
+  .about-grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:70px; }
+  .about-text p{ font-size:1.02rem; line-height:1.9; color:#d3cfdd; max-width:58ch; margin-bottom:22px; }
+  .about-text strong{ color:var(--paper); font-weight:600; }
+  .pull{
+    font-family:var(--display); font-weight:600; font-size:1.5rem; line-height:1.3;
+    color:var(--paper); margin:32px 0; padding:26px 0; border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+  }
+  .pull em{ font-style:normal; color:var(--red); }
 
-    nav a { transition: background 0.1s, color 0.1s; }
-    nav a:hover { background: #0a0a0a; color: #CCFF00; }
+  .info-card{ background:var(--ink-2); border:1px solid var(--line); padding:28px 26px; }
+  .info-card .ic-label{ font-size:11px; color:var(--yellow); letter-spacing:0.08em; margin-bottom:18px; }
+  .info-row{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  .info-row:last-child{ border-bottom:none; }
+  .info-row .k{ color:var(--muted); }
+  .info-row .v{ color:var(--paper); text-align:right; }
 
-    input, textarea {
-      background: white; border: 2px solid #0a0a0a;
-      padding: 10px 14px;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-      width: 100%; outline: none;
-      transition: box-shadow 0.12s;
-    }
-    input:focus, textarea:focus { box-shadow: 4px 4px 0 #CCFF00; }
+  /* ============ TIMELINE ============ */
+  .timeline-wrap{ width:100%; overflow-x:auto; }
+  .timeline-svg{ min-width:820px; width:100%; height:auto; display:block; }
+  .tl-caption{ font-size:12px; color:var(--muted); margin-top:20px; max-width:70ch; line-height:1.7; }
+  .tl-caption b{ color:var(--red); }
 
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #0a0a0a; color: #CCFF00;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700; font-size: 0.85rem;
-      padding: 14px 26px;
-      border: 2px solid #0a0a0a; box-shadow: 5px 5px 0 #CCFF00;
-      cursor: none; text-decoration: none;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-    .btn-primary:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 #CCFF00; }
+  /* ============ SKILLS ============ */
+  .skills-layout{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center; }
+  .radar-svg{ width:100%; height:auto; }
+  .skill-row{
+    display:grid; grid-template-columns:130px 1fr 44px; align-items:center; gap:18px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .skill-row:first-child{ border-top:1px solid var(--line); }
+  .skill-row .s-name{ font-size:13px; color:var(--paper); }
+  .skill-row .s-bar{ height:6px; background:rgba(246,244,236,0.07); position:relative; overflow:hidden; }
+  .skill-row .s-bar i{ position:absolute; inset:0; width:0; display:block; }
+  .skill-row .s-pct{ font-size:11px; color:var(--muted); text-align:right; }
 
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: white; color: #0a0a0a;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700; font-size: 0.85rem;
-      padding: 14px 26px;
-      border: 2px solid #0a0a0a; box-shadow: 5px 5px 0 #0a0a0a;
-      cursor: none; text-decoration: none;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-    .btn-secondary:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 #0a0a0a; }
+  /* ============ STATS — color-blocked panels ============ */
+  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); }
+  .stat-cell{ padding:36px 26px; display:flex; flex-direction:column; justify-content:space-between; min-height:200px; }
+  .stat-cell .num{ font-family:var(--display); font-weight:700; font-size:3.4rem; line-height:1; }
+  .stat-cell .lbl{ font-size:12px; line-height:1.55; margin-top:20px; }
+  .stat-cell.c1{ background:var(--red); color:var(--ink); }
+  .stat-cell.c2{ background:var(--yellow); color:var(--ink); }
+  .stat-cell.c3{ background:var(--blue); color:var(--paper); }
+  .stat-cell.c4{ background:var(--ink-2); color:var(--paper); border:1px solid var(--line-strong); }
+  .stat-cell .lbl{ opacity:0.85; }
 
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: transparent; color: #0a0a0a;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700; font-size: 0.75rem;
-      padding: 8px 16px;
-      border: 2px solid #0a0a0a;
-      cursor: none; text-decoration: none;
-      transition: background 0.1s, color 0.1s;
-    }
-    .btn-ghost:hover { background: #0a0a0a; color: #CCFF00; }
+  /* ============ PROJECTS ============ */
+  .projects{ display:flex; flex-direction:column; }
+  .proj{
+    display:grid; grid-template-columns:90px 1fr auto; gap:30px; align-items:start;
+    padding:38px 0; border-top:1px solid var(--line-strong);
+    text-decoration:none; color:inherit; position:relative; transition:padding-left .3s;
+  }
+  .proj:last-child{ border-bottom:1px solid var(--line-strong); }
+  .proj::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:0; background:var(--red);
+    transition:width .3s;
+  }
+  .proj:hover{ padding-left:20px; }
+  .proj:hover::before{ width:4px; }
+  .proj-idx{ font-family:var(--display); font-weight:700; font-size:1rem; color:var(--muted); }
+  .proj-name{ font-family:var(--display); font-weight:600; font-size:1.7rem; margin-bottom:10px; letter-spacing:-0.01em; }
+  .proj-desc{ color:var(--muted); font-size:0.93rem; max-width:60ch; line-height:1.7; }
+  .proj-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; max-width:190px; }
+  .tag{ font-size:10.5px; padding:5px 10px; white-space:nowrap; border:1px solid var(--line-strong); color:var(--muted); }
 
-    .project-card {
-      transition: transform 0.12s, box-shadow 0.12s;
-      cursor: none;
-    }
-    .project-card:hover { transform: translate(-3px,-3px); box-shadow: 10px 10px 0 #0a0a0a; }
+  /* ============ CUSTOM CURSOR ============ */
+  .cursor-dot{
+    position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
+    background:var(--red); pointer-events:none; z-index:100; mix-blend-mode:difference;
+    transform:translate(-50%,-50%); will-change:transform;
+  }
+  .cursor-ring{
+    position:fixed; top:0; left:0; width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--paper); pointer-events:none; z-index:100; mix-blend-mode:difference;
+    transform:translate(-50%,-50%); will-change:transform;
+  }
+  @media(max-width:900px){ .cursor-dot, .cursor-ring{ display:none; } }
 
-    .os-card { transition: transform 0.12s, box-shadow 0.12s; cursor: none; }
-    .os-card:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #0a0a0a; }
+  /* ============ MARQUEE ============ */
+  .marquee{
+    position:relative; overflow:hidden; border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+    padding:18px 0; background:var(--ink-2);
+  }
+  .marquee-track{ display:flex; width:max-content; animation:marquee 26s linear infinite; }
+  .marquee-track span{
+    font-family:var(--display); font-weight:600; font-size:1.1rem; text-transform:uppercase;
+    letter-spacing:0.02em; padding:0 28px; color:var(--muted); white-space:nowrap;
+    display:flex; align-items:center; gap:28px;
+  }
+  .marquee-track span i{ font-style:normal; color:var(--red); }
+  .marquee-track span:nth-child(3n+2) i{ color:var(--yellow); }
+  .marquee-track span:nth-child(3n+3) i{ color:var(--blue); }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #999;
-    }
+  /* ============ INFOGRAPHIC: HEATMAP ============ */
+  .heatmap-wrap{ display:grid; grid-template-columns:1fr 260px; gap:60px; align-items:center; }
+  .heatmap-grid{ display:grid; grid-template-columns:repeat(26, 1fr); gap:4px; }
+  .heatmap-grid .cell{
+    aspect-ratio:1; background:rgba(246,244,236,0.06); border-radius:2px; transform:scale(0.4); opacity:0;
+  }
+  .heatmap-legend{ display:flex; align-items:center; gap:8px; margin-top:18px; font-size:11px; color:var(--muted); }
+  .heatmap-legend .sw{ width:10px; height:10px; border-radius:2px; }
+  .heatmap-side .hs-num{ font-family:var(--display); font-weight:700; font-size:2.6rem; color:var(--red); line-height:1; }
+  .heatmap-side .hs-lbl{ font-size:12px; color:var(--muted); margin-top:12px; line-height:1.7; }
 
-    .big-text { font-family: 'Bebas Neue', cursive; line-height: 0.88; }
+  /* ============ INFOGRAPHIC: DONUT ============ */
+  .donut-wrap{ display:grid; grid-template-columns:auto 1fr; gap:50px; align-items:center; margin-top:var(--space-5); }
+  .donut-legend{ display:flex; flex-direction:column; gap:16px; }
+  .dl-row{ display:flex; align-items:center; gap:14px; }
+  .dl-sw{ width:12px; height:12px; flex-shrink:0; }
+  .dl-name{ font-size:13px; color:var(--paper); min-width:120px; }
+  .dl-pct{ font-family:var(--display); font-weight:700; font-size:1.1rem; margin-left:auto; }
 
-    .currently-pulse {
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.4); }
-    }
+  /* ============ MAGNETIC BUTTON ============ */
+  .btn{ position:relative; }
 
-    .stat-number {
-      font-family: 'Bebas Neue', cursive;
-      line-height: 1;
-    }
+  .contact-grid{ display:grid; grid-template-columns:1.3fr 0.7fr; gap:60px; }
+  h2.big{
+    font-family:var(--display); font-weight:700; text-transform:uppercase;
+    font-size:clamp(2.4rem, 6.6vw, 5rem); letter-spacing:-0.02em; line-height:0.98; max-width:12ch; margin-bottom:28px;
+  }
+  h2.big .accent{ color:var(--red); }
+  .contact-grid > div:first-child p{ color:var(--muted); max-width:48ch; font-size:0.98rem; line-height:1.8; }
+  .links{ display:flex; flex-direction:column; }
+  .links a{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14px; text-decoration:none;
+    padding:18px 4px; border-top:1px solid var(--line-strong); transition:.25s;
+  }
+  .links a:last-child{ border-bottom:1px solid var(--line-strong); }
+  .links a:hover{ color:var(--red); padding-left:10px; }
+  .links a .arrow{ color:var(--muted); transition:.25s; }
+  .links a:hover .arrow{ color:var(--red); transform:translate(3px,-3px); }
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #F4EFE6; }
-    ::-webkit-scrollbar-thumb { background: #0a0a0a; }
+  footer{
+    padding:30px 5vw 44px; font-size:11px; color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    border-top:1px solid var(--line);
+  }
 
-    @media (max-width: 640px) {
-      body { cursor: auto; }
-      #cursor { display: none; }
-    }
-  </style>
+  @media(max-width:900px){
+    .about-grid, .skills-layout, .contact-grid, .heatmap-wrap, .donut-wrap{ grid-template-columns:1fr; gap:32px; }
+    .heatmap-grid{ grid-template-columns:repeat(18,1fr); }
+    .sec-head{ grid-template-columns:1fr; gap:10px; }
+    .proj{ grid-template-columns:40px 1fr; }
+    .proj-tags{ grid-column:2; justify-content:flex-start; max-width:none; margin-top:12px; }
+    .stat-grid{ grid-template-columns:1fr 1fr; }
+    header nav{ display:none; }
+    .hero-bottom{ grid-template-columns:1fr; }
+  }
+</style>
 </head>
-<body class="text-neo-black font-condensed antialiased selection:bg-neo-black selection:text-acid">
+<body>
 
-  <div id="cursor"></div>
-  <div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="grid-overlay"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
 
-  <!-- ─── NAV ─── -->
-  <nav class="fixed top-0 w-full z-50 px-4 py-3 pointer-events-none">
-    <div class="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
-      <a href="#" class="bg-neo-black text-acid font-mono font-black text-base px-4 py-1 border-2 border-neo-black shadow-brutal-sm hover:bg-acid hover:text-neo-black transition-colors cursor-none">UDAY.exe</a>
-      <div class="hidden md:flex gap-0 bg-neo-bg border-2 border-neo-black shadow-brutal">
-        <a href="#about"      class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/ABOUT</a>
-        <a href="#skills"     class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/STACK</a>
-        <a href="#experience" class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/LOGS</a>
-        <a href="#projects"   class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/WORK</a>
-        <a href="#opensource" class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/OPEN-SRC</a>
-        <a href="#community"  class="px-3 py-2 font-mono text-xs font-bold border-r-2 border-neo-black cursor-none">/COMMUNITY</a>
-        <a href="#contact"    class="px-3 py-2 font-mono text-xs font-bold bg-acid cursor-none">HIRE ME</a>
-      </div>
-      <button id="mob-btn" class="md:hidden bg-neo-black text-acid font-mono text-xs font-bold px-3 py-2 border-2 border-neo-black cursor-none">☰ MENU</button>
-    </div>
-    <div id="mob-menu" class="hidden md:hidden bg-neo-bg border-2 border-neo-black mt-2 mx-4 shadow-brutal pointer-events-auto">
-      <a href="#about"      class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/ABOUT</a>
-      <a href="#skills"     class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/STACK</a>
-      <a href="#experience" class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/LOGS</a>
-      <a href="#projects"   class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/WORK</a>
-      <a href="#opensource" class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/OPEN-SRC</a>
-      <a href="#community"  class="block px-4 py-3 font-mono text-xs font-bold border-b border-neo-black/20 hover:bg-neo-black hover:text-acid cursor-none">/COMMUNITY</a>
-      <a href="#contact"    class="block px-4 py-3 font-mono text-xs font-bold bg-acid cursor-none">HIRE ME</a>
-    </div>
+<div class="wrap">
+
+<header>
+  <div class="mark">UDAY</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#timeline">Journey</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Work</a>
+    <a href="#contact">Contact</a>
   </nav>
+  <div class="clock">BLR · IN</div>
+</header>
 
-  <!-- ─── HERO ─── -->
-  <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-24 pb-12 relative overflow-hidden border-b-4 border-neo-black">
-    <div class="absolute top-28 right-12 w-20 h-20 bg-acid border-4 border-neo-black shadow-brutal rotate-12 hidden lg:block"></div>
-    <div class="absolute bottom-28 right-36 w-12 h-12 bg-neo-red border-4 border-neo-black shadow-brutal -rotate-6 hidden lg:block"></div>
-    <div class="absolute top-1/2 right-12 w-7 h-7 bg-neo-blue border-2 border-neo-black hidden lg:block"></div>
-    <div class="absolute bottom-16 left-1/3 w-5 h-5 bg-neo-orange border-2 border-neo-black rotate-45 hidden lg:block"></div>
-
-    <div class="relative z-10 max-w-6xl">
-
-      <!-- Currently building banner -->
-      <div class="inline-flex items-center gap-3 bg-neo-black text-white px-4 py-2 font-mono text-xs font-bold mb-6 reveal border-l-4 border-acid">
-        <span class="w-2 h-2 bg-acid rounded-full currently-pulse inline-block flex-shrink-0"></span>
-        <span class="text-gray-400">CURRENTLY BUILDING →</span>
-        <a href="https://github.com/balacsegprec/aipms-rag-bootcamp" target="_blank" class="text-acid hover:underline cursor-none">AIPMS RAG Bootcamp</a>
-        <span class="text-gray-600">· RAG-based AI system @ GPREC</span>
-      </div>
-
-      <h1 class="big-text text-[17vw] md:text-[12vw] text-neo-black reveal" style="transition-delay:0.08s">SOMAPURAM</h1>
-      <h1 class="big-text text-[17vw] md:text-[12vw] mb-5 reveal" style="-webkit-text-stroke: 3px #0a0a0a; color: transparent; transition-delay:0.13s">UDAY</h1>
-
-      <div class="flex flex-wrap gap-2 mb-6 reveal" style="transition-delay:0.18s">
-        <span class="bg-acid border-2 border-neo-black px-3 py-1 font-mono text-xs font-bold shadow-brutal-sm">Frontend-core</span>
-        <span class="bg-white border-2 border-neo-black px-3 py-1 font-mono text-xs font-bold shadow-brutal-sm">Flask · Python Backend</span>
-        <span class="bg-neo-blue text-white border-2 border-neo-black px-3 py-1 font-mono text-xs font-bold shadow-brutal-sm">MERN Stack</span>
-        <span class="bg-neo-orange text-white border-2 border-neo-black px-3 py-1 font-mono text-xs font-bold shadow-brutal-sm">Tableau · Data Analytics</span>
-        <span class="bg-neo-black text-acid border-2 border-neo-black px-3 py-1 font-mono text-xs font-bold shadow-brutal-sm">Open Source Contributor</span>
-      </div>
-
-      <p class="font-mono text-sm md:text-base text-gray-600 max-w-xl mb-10 reveal border-l-4 border-acid pl-4" style="transition-delay:0.22s">
-        I build things that actually work — clean interfaces, solid backends, and dashboards people can use.<br>
-        <span class="text-gray-400 text-xs mt-1 block">B.Tech CSE · GPREC, Kurnool · Final Year · 2026</span>
-      </p>
-
-      <div class="flex flex-wrap gap-4 mb-8 reveal" style="transition-delay:0.26s">
-        <a href="#projects" class="btn-primary"><i class="ri-arrow-down-line"></i> SEE MY WORK</a>
-        <a href="https://udayworks.me" target="_blank" class="btn-secondary"><i class="ri-external-link-line"></i> FREELANCE PORTFOLIO</a>
-        <a href="#" class="btn-secondary cursor-none" onclick="alert('Resume link coming soon — reach out at udaysomapuram@gmail.com')"><i class="ri-download-line"></i> RESUME</a>
-      </div>
-
-      <div class="flex flex-wrap gap-x-4 gap-y-1 reveal" style="transition-delay:0.3s">
-        <a href="mailto:udaysomapuram@gmail.com" class="font-mono text-xs text-gray-500 hover:text-neo-red transition-colors cursor-none">udaysomapuram@gmail.com</a>
-        <span class="text-gray-300 hidden sm:inline">·</span>
-        <a href="https://linkedin.com/in/somapuramuday" target="_blank" class="font-mono text-xs text-gray-500 hover:text-neo-blue transition-colors cursor-none">linkedin/somapuramuday</a>
-        <span class="text-gray-300 hidden sm:inline">·</span>
-        <a href="https://github.com/udaycodespace" target="_blank" class="font-mono text-xs text-gray-500 hover:text-neo-black transition-colors cursor-none">github/udaycodespace</a>
-        <span class="text-gray-300 hidden sm:inline">·</span>
-        <a href="https://udayworks.me" target="_blank" class="font-mono text-xs text-gray-500 hover:text-neo-orange transition-colors cursor-none">udayworks.me</a>
-      </div>
+<section class="hero frame" id="hero">
+  <div class="hero-eyebrow"><span class="dot"></span>SOFTWARE ENGINEER — BENGALURU</div>
+  <h1 class="headline">
+    <div class="row"><span class="word">Somapuram</span></div>
+    <div class="row"><span class="word accent">Uday.</span></div>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">
+      <strong>Full-stack developer</strong> and <strong>cloud engineer</strong> based in Bengaluru.
+      I ship production features, provision the infrastructure they run on, and spend my off-hours
+      pulling apart other people's codebases to see how they tick.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-fill" href="#projects">View work →</a>
+      <a class="btn btn-line" href="mailto:udaysomapuram@gmail.com">Get in touch</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ─── TICKER ─── -->
-  <div class="bg-neo-black border-b-4 border-neo-black py-3 overflow-hidden">
-    <div class="marquee-wrap">
-      <div class="marquee-track font-mono font-bold text-xs text-acid">
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// HTML · CSS · JAVASCRIPT</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// FLASK · PYTHON BACKEND</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// REACT · NODE.JS · EXPRESS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// MERN · MEAN STACK</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// TABLEAU · DATA ANALYTICS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// FULL-STACK ENGINEER</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// 5+ OPEN SOURCE CONTRIBUTIONS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// GOOGLE GEMINI AMBASSADOR</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// INKERS TECHNOLOGY ALUM</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// HTML · CSS · JAVASCRIPT</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// FLASK · PYTHON BACKEND</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// REACT · NODE.JS · EXPRESS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// MERN · MEAN STACK</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// TABLEAU · DATA ANALYTICS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// FULL-STACK ENGINEER</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// 5+ OPEN SOURCE CONTRIBUTIONS</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// GOOGLE GEMINI AMBASSADOR</span>
-        <span class="px-5 border-r border-acid/20 whitespace-nowrap">/// INKERS TECHNOLOGY ALUM</span>
+<div class="marquee">
+  <div class="marquee-track">
+    <span><i>●</i>REACT</span><span><i>●</i>NODE.JS</span><span><i>●</i>AZURE</span><span><i>●</i>DOCKER</span><span><i>●</i>MONGODB</span><span><i>●</i>OPEN SOURCE</span><span><i>●</i>EXPRESS</span><span><i>●</i>SYSTEM DESIGN</span>
+    <span><i>●</i>REACT</span><span><i>●</i>NODE.JS</span><span><i>●</i>AZURE</span><span><i>●</i>DOCKER</span><span><i>●</i>MONGODB</span><span><i>●</i>OPEN SOURCE</span><span><i>●</i>EXPRESS</span><span><i>●</i>SYSTEM DESIGN</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="frame">
+    <div class="sec-head">
+      <div class="sec-tag"><b>01</b> / About</div>
+      <h2 class="sec-title">Building software is one thing. Running it in the cloud is another.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>A year ago I was deep in React and Node.js code. Today I split my time between <strong>Azure infrastructure</strong> and open source, learning what happens after the MVP stage — the unglamorous part nobody posts about.</p>
+        <div class="pull">"Give me a codebase I've never seen and I'll spend a weekend finding my way around it — <em>not because it's easy</em>, but because that's how I actually learn."</div>
+        <p>I'm a <strong>Technology Consultant at Meteoros Automation</strong>, working on Azure VM provisioning, cloud lab environments, and QA support. Before that I built full-stack features for a Frappe + React ERP at Inkers Technology, and earlier ran <strong>SVDS</strong>, a freelance web studio I opened, grew for a quarter, and closed on my own terms once it had done its job.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">CURRENT ROLE</div>
+        <div class="info-row"><span class="k">Position</span><span class="v">Technology Consultant</span></div>
+        <div class="info-row"><span class="k">Company</span><span class="v">Meteoros Automation</span></div>
+        <div class="info-row"><span class="k">Focus</span><span class="v">Azure infra, QA</span></div>
+        <div class="info-row"><span class="k">Based in</span><span class="v">Bengaluru, IN</span></div>
+        <div class="info-row"><span class="k">Education</span><span class="v">B.Tech CSE, '26</span></div>
+        <div class="info-row"><span class="k">Status</span><span class="v" style="color:var(--green)">● Open to work</span></div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ─── ABOUT + STATS ─── -->
-  <section id="about" class="py-24 px-6 md:px-16">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start mb-16">
-        <!-- Code block -->
-        <div class="md:col-span-5 reveal">
-          <div class="bg-neo-black border-4 border-neo-black p-7 shadow-brutal-lg relative">
-            <div class="absolute -top-3 -left-3 bg-acid border-2 border-neo-black px-3 py-0.5 font-mono text-xs font-black text-neo-black">IDENTITY.txt</div>
-            <div class="font-mono text-sm leading-relaxed">
-              <p class="text-gray-500 mb-2">// who is this guy?</p>
-              <p class="text-white"><span class="text-acid">const</span> <span class="text-neo-orange">uday</span> = {'{'}</p>
-              <p class="text-white ml-5">name: <span class="text-green-400">"Somapuram Uday"</span>,</p>
-              <p class="text-white ml-5">role: <span class="text-green-400">"Full-Stack Engineer"</span>,</p>
-              <p class="text-white ml-5">strength: <span class="text-green-400">"Frontend → Backend → Data"</span>,</p>
-              <p class="text-white ml-5">college: <span class="text-green-400">"GPREC, Kurnool"</span>,</p>
-              <p class="text-white ml-5">rollNo: <span class="text-green-400">"229X1A2856"</span>,</p>
-              <p class="text-white ml-5">graduating: <span class="text-neo-orange">2026</span>,</p>
-              <p class="text-white ml-5">freelance: <span class="text-green-400">"udayworks.me"</span>,</p>
-              <p class="text-white ml-5">github: <span class="text-green-400">"udaycodespace"</span>,</p>
-              <p class="text-white ml-5">status: <span class="text-acid">"open_to_work"</span></p>
-              <p class="text-white">{'}'}</p>
-            </div>
-          </div>
+<section id="timeline">
+  <div class="frame">
+    <div class="sec-head">
+      <div class="sec-tag"><b>02</b> / Journey</div>
+      <h2 class="sec-title">Six years quiet. Then all at once.</h2>
+    </div>
+    <div class="timeline-wrap">
+      <svg class="timeline-svg" viewBox="0 0 800 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="tl-path" d="M 20 170 C 120 170, 140 60, 240 60 S 380 190, 480 190 S 620 40, 720 40 S 760 90 780 90"
+          stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 6" fill="none" opacity="0.6"/>
+        <g class="tl-node">
+          <circle cx="20" cy="170" r="6" fill="var(--ink)" stroke="var(--blue)" stroke-width="2.5"/>
+          <text x="20" y="196" fill="var(--muted)" font-family="IBM Plex Mono" font-size="10">2018</text>
+          <text x="20" y="148" fill="var(--paper)" font-family="Bricolage Grotesque" font-weight="600" font-size="15">Code-in</text>
+        </g>
+        <g class="tl-node">
+          <circle cx="240" cy="60" r="5" fill="var(--ink)" stroke="var(--muted)" stroke-width="2" stroke-dasharray="2 2"/>
+          <text x="240" y="86" fill="var(--muted)" font-family="IBM Plex Mono" font-size="10">'19–'25</text>
+          <text x="240" y="40" fill="var(--muted)" font-family="Bricolage Grotesque" font-weight="600" font-size="15">Went quiet</text>
+        </g>
+        <g class="tl-node">
+          <circle cx="480" cy="190" r="6" fill="var(--ink)" stroke="var(--yellow)" stroke-width="2.5"/>
+          <text x="480" y="216" fill="var(--muted)" font-family="IBM Plex Mono" font-size="10">Jan 2026</text>
+          <text x="480" y="168" fill="var(--paper)" font-family="Bricolage Grotesque" font-weight="600" font-size="15">Started again, solo</text>
+        </g>
+        <g class="tl-node">
+          <circle cx="720" cy="40" r="7" fill="var(--ink)" stroke="var(--red)" stroke-width="3"/>
+          <text x="700" y="22" fill="var(--paper)" font-family="Bricolage Grotesque" font-weight="600" font-size="15">Now</text>
+          <text x="618" y="65" fill="var(--muted)" font-family="IBM Plex Mono" font-size="10">Running LearnHub, ECSOC</text>
+        </g>
+      </svg>
+    </div>
+    <div class="tl-caption">Picked open source back up in <b>January 2026</b> — first alone, then as a contributor, now as a project admin.</div>
+  </div>
+</section>
 
-          <!-- Education box -->
-          <div class="bg-white border-4 border-neo-black p-5 shadow-brutal mt-5 reveal">
-            <p class="section-label mb-3">EDUCATION</p>
-            <div class="border-l-4 border-acid pl-4">
-              <p class="font-black text-lg uppercase font-condensed">B.Tech — Computer Science & Engineering</p>
-              <p class="font-mono text-xs text-neo-blue font-bold mt-1">G. Pulla Reddy Engineering College (Autonomous)</p>
-              <p class="font-mono text-xs text-gray-500 mt-0.5">Affiliated to JNTUA · Kurnool, Andhra Pradesh</p>
-              <p class="font-mono text-xs text-gray-500">2022 – 2026 · Roll No: 229X1A2856</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- About text -->
-        <div class="md:col-span-7 reveal" style="transition-delay:0.1s">
-          <p class="section-label mb-3">// 01 — ABOUT</p>
-          <h2 class="big-text text-7xl md:text-8xl mb-6">WHO<br>AM I?</h2>
-          <p class="font-mono text-sm leading-relaxed text-gray-700 mb-4 border-l-4 border-neo-black pl-4">
-            I'm a final-year CSE student at GPREC, Kurnool — and I genuinely enjoy building things. Not just finishing them, actually building them. My sweet spot is frontend — HTML, CSS, JavaScript is where I'm most comfortable — and I back that up with Flask+Python on the server side.
-          </p>
-          <p class="font-mono text-sm leading-relaxed text-gray-700 mb-4 border-l-4 border-acid pl-4">
-            I've done enough React, Node.js and the MERN/MEAN stack to build real stuff end-to-end. On the data side, I've shipped complete Tableau dashboards and run proper analytics pipelines. I also have some ML background — though honestly I care more about building clean interfaces than training models right now.
-          </p>
-          <p class="font-mono text-sm leading-relaxed text-gray-700 mb-6 border-l-4 border-neo-black pl-4">
-            I interned at Inkers Technology in Bengaluru (Dec '25 – Mar '26), contributed frontend to 5+ open-source projects, and built a blockchain-based credential system as my final-year project with two teammates. I also run a freelance portfolio at <a href="https://udayworks.me" target="_blank" class="text-neo-blue underline cursor-none">udayworks.me</a>.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <div class="bg-white border-2 border-neo-black px-4 py-2 shadow-brutal-sm font-mono text-xs font-bold">📍 Kurnool, AP</div>
-            <div class="bg-acid border-2 border-neo-black px-4 py-2 shadow-brutal-sm font-mono text-xs font-bold">🟢 OPEN TO WORK</div>
-            <div class="bg-neo-blue text-white border-2 border-neo-black px-4 py-2 shadow-brutal-sm font-mono text-xs font-bold">🎓 CSE '26</div>
-            <div class="bg-neo-black text-acid border-2 border-neo-black px-4 py-2 shadow-brutal-sm font-mono text-xs font-bold">💼 GPREC Autonomous</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stats row -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
-        <div class="bg-neo-black border-4 border-neo-black p-6 shadow-brutal text-center">
-          <div class="stat-number text-6xl text-acid">5+</div>
-          <p class="font-mono text-xs text-gray-400 mt-2 uppercase tracking-widest">Open Source<br>Contributions</p>
-        </div>
-        <div class="bg-acid border-4 border-neo-black p-6 shadow-brutal text-center">
-          <div class="stat-number text-6xl text-neo-black">4</div>
-          <p class="font-mono text-xs text-neo-black mt-2 uppercase tracking-widest font-bold">Months at<br>Inkers Tech</p>
-        </div>
-        <div class="bg-white border-4 border-neo-black p-6 shadow-brutal text-center">
-          <div class="stat-number text-6xl text-neo-black">3+</div>
-          <p class="font-mono text-xs text-gray-500 mt-2 uppercase tracking-widest">Internships<br>Completed</p>
-        </div>
-        <div class="bg-neo-blue border-4 border-neo-black p-6 shadow-brutal text-center">
-          <div class="stat-number text-6xl text-white">10+</div>
-          <p class="font-mono text-xs text-blue-100 mt-2 uppercase tracking-widest">Certifications<br>Earned</p>
-        </div>
-      </div>
-
-      <!-- GitHub note -->
-      <div class="mt-5 bg-white border-2 border-neo-black p-4 shadow-brutal-sm flex gap-3 items-start reveal">
-        <span class="text-lg flex-shrink-0">ℹ️</span>
-        <p class="font-mono text-xs text-gray-600 leading-relaxed">
-          <span class="font-bold text-neo-black">Note on GitHub stats:</span> My commit history may look low — I reorganized from 54 repos down to 10 structured ones, so the contribution graph doesn't reflect the actual work. The code is all there, just consolidated.
-        </p>
+<section id="skills">
+  <div class="frame">
+    <div class="sec-head">
+      <div class="sec-tag"><b>03</b> / Skills</div>
+      <h2 class="sec-title">What I actually reach for.</h2>
+    </div>
+    <div class="skills-layout">
+      <svg class="radar-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+        <g id="radar-rings">
+          <polygon points="170,30 290,105 290,235 170,310 50,235 50,105" fill="none" stroke="var(--line-strong)" stroke-width="1"/>
+          <polygon points="170,70 250,120 250,220 170,270 90,220 90,120" fill="none" stroke="var(--line)" stroke-width="1"/>
+          <polygon points="170,110 210,135 210,205 170,230 130,205 130,135" fill="none" stroke="var(--line)" stroke-width="1"/>
+          <line x1="170" y1="170" x2="170" y2="30" stroke="var(--line)"/>
+          <line x1="170" y1="170" x2="290" y2="105" stroke="var(--line)"/>
+          <line x1="170" y1="170" x2="290" y2="235" stroke="var(--line)"/>
+          <line x1="170" y1="170" x2="170" y2="310" stroke="var(--line)"/>
+          <line x1="170" y1="170" x2="50" y2="235" stroke="var(--line)"/>
+          <line x1="170" y1="170" x2="50" y2="105" stroke="var(--line)"/>
+        </g>
+        <polygon id="radar-shape" points="170,170 170,170 170,170 170,170 170,170 170,170"
+          fill="rgba(255,59,47,0.2)" stroke="var(--red)" stroke-width="1.5"/>
+        <text x="170" y="20" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">React</text>
+        <text x="300" y="102" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10">Node</text>
+        <text x="300" y="240" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10">Azure</text>
+        <text x="170" y="326" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">Mongo</text>
+        <text x="12" y="240" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10" text-anchor="start">QA</text>
+        <text x="12" y="102" fill="var(--paper)" font-family="IBM Plex Mono" font-size="10" text-anchor="start">Docker</text>
+      </svg>
+      <div class="skill-list">
+        <div class="skill-row"><span class="s-name">React / JS</span><div class="s-bar"><i style="background:var(--red)" data-val="92"></i></div><span class="s-pct">92%</span></div>
+        <div class="skill-row"><span class="s-name">Node / Express</span><div class="s-bar"><i style="background:var(--yellow)" data-val="88"></i></div><span class="s-pct">88%</span></div>
+        <div class="skill-row"><span class="s-name">Azure infra</span><div class="s-bar"><i style="background:var(--blue)" data-val="74"></i></div><span class="s-pct">74%</span></div>
+        <div class="skill-row"><span class="s-name">MongoDB</span><div class="s-bar"><i style="background:var(--green)" data-val="80"></i></div><span class="s-pct">80%</span></div>
+        <div class="skill-row"><span class="s-name">QA & testing</span><div class="s-bar"><i style="background:var(--red)" data-val="83"></i></div><span class="s-pct">83%</span></div>
+        <div class="skill-row"><span class="s-name">Docker</span><div class="s-bar"><i style="background:var(--blue)" data-val="70"></i></div><span class="s-pct">70%</span></div>
       </div>
     </div>
-  </section>
 
-  <!-- ─── CURRENTLY BUILDING ─── -->
-  <section class="py-12 px-6 md:px-16 bg-neo-black border-y-4 border-neo-black">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
-        <div class="flex-shrink-0">
-          <div class="flex items-center gap-3 mb-1">
-            <span class="w-3 h-3 bg-acid rounded-full currently-pulse inline-block"></span>
-            <p class="font-mono text-xs text-acid font-bold uppercase tracking-widest">Currently Building</p>
-          </div>
-          <h3 class="big-text text-5xl text-white">WHAT'S<br>COOKING</h3>
-        </div>
-        <div class="flex-1 border-l-0 md:border-l-4 border-acid md:pl-8">
-          <div class="bg-neo-bg border-4 border-acid p-5 shadow-brutal-acid">
-            <div class="flex justify-between items-start flex-wrap gap-3">
-              <div>
-                <p class="font-black text-xl uppercase font-condensed">AIPMS RAG Bootcamp</p>
-                <p class="font-mono text-xs text-gray-500 mt-1">RAG-based AI system · GPREC Collaboration</p>
-              </div>
-              <a href="https://github.com/balacsegprec/aipms-rag-bootcamp" target="_blank" class="btn-ghost text-xs cursor-none">
-                <i class="ri-github-fill"></i> VIEW ON GITHUB
-              </a>
-            </div>
-            <p class="font-mono text-sm text-gray-700 mt-3 leading-relaxed">
-              Building a Retrieval-Augmented Generation system as part of a bootcamp initiative at GPREC. Involves setting up document pipelines, embedding models, and a query interface — good mix of backend work and AI tooling.
-            </p>
-            <div class="flex flex-wrap gap-2 mt-3">
-              <span class="tag tag-acid">RAG</span>
-              <span class="tag">LLM</span>
-              <span class="tag">Python</span>
-              <span class="tag">Vector DB</span>
-              <span class="tag">GPREC</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── SKILLS ─── -->
-  <section id="skills" class="py-20 bg-neo-black text-white border-b-4 border-neo-black relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(#ccc 1px, transparent 1px), linear-gradient(90deg, #ccc 1px, transparent 1px); background-size: 40px 40px;"></div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-4 border-white pb-4">
-        <h2 class="big-text text-7xl md:text-9xl">TECH<span class="text-acid">_STACK</span></h2>
-        <div class="flex items-center gap-2 mb-1">
-          <div class="w-2 h-2 bg-acid rounded-full animate-pulse"></div>
-          <p class="font-mono text-acid text-xs font-bold">/// FRONTEND_FIRST</p>
-        </div>
-      </div>
-
-      <p class="section-label text-gray-500 mb-3">FRONTEND — WHERE I LIVE</p>
-      <div class="flex flex-wrap mb-8">
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-acid flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ CORE</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">HTML5</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-blue flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ STYLING</div>
-          <div class="text-white font-display text-2xl">CSS3</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-yellow-300 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ LANGUAGE</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">JS</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-cyan-400 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ LIBRARY</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">REACT</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-purple-500 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ STATE</div>
-          <div class="text-white font-display text-2xl">REDUX</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-sky-400 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ STYLING</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">TAILWIND</div>
-        </div>
-      </div>
-
-      <p class="section-label text-gray-500 mb-3">BACKEND</p>
-      <div class="flex flex-wrap mb-8">
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-teal flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ FRAMEWORK</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">FLASK</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-blue-500 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ LANGUAGE</div>
-          <div class="text-white font-display text-2xl">PYTHON</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-green-500 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ RUNTIME</div>
-          <div class="text-white font-display text-2xl">NODE.JS</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-bg flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ FRAMEWORK</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">EXPRESS</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-green-800 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ DATABASE</div>
-          <div class="text-white font-display text-2xl">MONGODB</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-blue-300 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ DATABASE</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">SQL</div>
-        </div>
-      </div>
-
-      <p class="section-label text-gray-500 mb-3">DATA · ANALYTICS · TOOLS</p>
-      <div class="flex flex-wrap">
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-orange flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ DATAVIZ</div>
-          <div class="text-white font-display text-2xl">TABLEAU</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-yellow-500 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ DATA</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">PANDAS</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-red flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ ML-LIGHT</div>
-          <div class="text-white font-display text-2xl">SKLEARN</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-gray-300 flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ VERSION</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">GIT</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-neo-blue flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-white font-mono text-[9px] mb-1 opacity-50">>_ CONTAINERS</div>
-          <div class="text-white font-display text-2xl">DOCKER</div>
-        </div>
-        <div class="skill-cell group w-1/2 sm:w-1/3 md:w-1/6 h-20 bg-neo-black hover:bg-acid flex flex-col items-center justify-center p-2">
-          <div class="text-acid group-hover:text-neo-black font-mono text-[9px] mb-1 opacity-50">>_ WEB3</div>
-          <div class="text-white group-hover:text-neo-black font-display text-2xl">IPFS/ZKP</div>
-        </div>
-      </div>
-      <div class="border-t-4 border-white mt-5 pt-3 flex justify-between font-mono text-xs text-gray-600">
-        <span>TOTAL_NODES: 18 · FRONTEND_NODES: 6 (PRIMARY)</span>
-        <span>STATUS: ONLINE</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── EXPERIENCE ─── -->
-  <section id="experience" class="py-24 px-6 md:px-16">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label mb-3">// 03 — EXPERIENCE_LOG</p>
-      <h2 class="big-text text-7xl md:text-9xl mb-14">EXP<span class="text-neo-red">_LOG</span></h2>
-
-      <div class="relative border-l-4 border-neo-black ml-2 space-y-10">
-
-        <!-- Inkers -->
-        <div class="reveal relative pl-10">
-          <div class="exp-dot bg-acid"></div>
-          <div class="bg-white border-4 border-neo-black p-6 shadow-brutal hover:shadow-brutal-xl transition-all">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-dashed border-gray-200 pb-3 mb-4 gap-2">
-              <h3 class="text-2xl md:text-3xl font-black uppercase font-condensed">Full-Stack Intern</h3>
-              <span class="font-mono text-xs font-bold bg-neo-black text-acid px-2 py-1 flex-shrink-0">DEC 2025 – MAR 2026 · 4 MOS</span>
-            </div>
-            <p class="font-mono text-sm text-neo-blue font-bold mb-1">@ Inkers Technology Pvt. Ltd.</p>
-            <p class="font-mono text-xs text-gray-500 mb-3">HSR Layout, Bengaluru — Offline / In-person</p>
-            <ul class="font-mono text-xs text-gray-700 space-y-1.5">
-              <li>→ Solo-built CampusEventHub — a full event management platform on the MERN stack</li>
-              <li>→ Delivered a Redux Toolkit Task Manager and a Frappe+React Enterprise Task Manager with role-based access control</li>
-              <li>→ Completed DevOps foundations: Docker, shell scripting, MIT Missing Semester</li>
-              <li>→ Final phase: remote documentation and GitHub consolidation</li>
-              <li>→ Formally certified as diligent, proactive and eager to learn (Completion Certificate issued by company)</li>
-            </ul>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="tag">MERN</span><span class="tag">Redux Toolkit</span><span class="tag">Frappe Framework</span><span class="tag">Docker</span><span class="tag">GitHub</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Open Source -->
-        <div class="reveal relative pl-10" style="transition-delay:0.05s">
-          <div class="exp-dot bg-neo-blue"></div>
-          <div class="bg-white border-4 border-neo-black p-6 shadow-brutal hover:shadow-brutal-xl transition-all">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-dashed border-gray-200 pb-3 mb-4 gap-2">
-              <h3 class="text-2xl md:text-3xl font-black uppercase font-condensed">Frontend Engineer · Open Source</h3>
-              <span class="font-mono text-xs font-bold bg-neo-black text-acid px-2 py-1 flex-shrink-0">JAN 2026 – PRESENT</span>
-            </div>
-            <p class="font-mono text-sm text-neo-blue font-bold mb-1">@ Open Source (Remote · Part-time)</p>
-            <p class="font-mono text-xs text-gray-500 mb-3">github.com/udaycodespace/open-source</p>
-            <ul class="font-mono text-xs text-gray-700 space-y-1.5">
-              <li>→ Contributed frontend to 5 production-oriented open-source projects across ML, Spring Boot, and Flask stacks</li>
-              <li>→ Clear role discipline — UI/UX ownership without touching backend or ML code</li>
-              <li>→ Appreciated by maintainers for clean code, good communication, and respecting project scope</li>
-            </ul>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="tag">HTML/CSS/JS</span><span class="tag">React</span><span class="tag">Flask Frontend</span><span class="tag">REST API Integration</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Edunet -->
-        <div class="reveal relative pl-10" style="transition-delay:0.1s">
-          <div class="exp-dot bg-neo-orange"></div>
-          <div class="bg-white border-4 border-neo-black p-6 shadow-brutal hover:shadow-brutal-xl transition-all">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-dashed border-gray-200 pb-3 mb-4 gap-2">
-              <h3 class="text-2xl md:text-3xl font-black uppercase font-condensed">AI + Azure Virtual Intern</h3>
-              <span class="font-mono text-xs font-bold bg-neo-black text-acid px-2 py-1 flex-shrink-0">MAY – JUN 2025</span>
-            </div>
-            <p class="font-mono text-sm text-neo-blue font-bold mb-1">@ Edunet Foundation × Microsoft × AICTE</p>
-            <p class="font-mono text-xs text-gray-500 mb-3">Remote · 4-week structured program</p>
-            <ul class="font-mono text-xs text-gray-700 space-y-1.5">
-              <li>→ Built an Anime Recommendation System using K-Means clustering + TF-IDF on 15K+ entries</li>
-              <li>→ Worked with Python, scikit-learn, nltk, Azure ML Studio, and Google Colab</li>
-              <li>→ Passed AI-900 assessments and delivered final GitHub submission + demo</li>
-            </ul>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="tag">Python</span><span class="tag">Unsupervised ML</span><span class="tag">Azure</span><span class="tag tag-acid">AI-900 Certified</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tableau placeholder -->
-        <div class="reveal relative pl-10" style="transition-delay:0.15s">
-          <div class="exp-dot bg-neo-pink"></div>
-          <div class="bg-white border-4 border-dashed border-neo-black p-6 shadow-brutal-sm">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-dashed border-gray-200 pb-3 mb-4 gap-2">
-              <h3 class="text-2xl md:text-3xl font-black uppercase font-condensed text-gray-400">Data Analytics Intern · Tableau</h3>
-              <span class="font-mono text-xs font-bold bg-gray-200 text-gray-500 px-2 py-1 flex-shrink-0">DETAILS COMING SOON</span>
-            </div>
-            <p class="font-mono text-xs text-gray-400">Tableau & Data Analytics internship — company and dates to be added.</p>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="tag">Tableau</span><span class="tag">Data Analytics</span><span class="tag">EDA</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PROJECTS ─── -->
-  <section id="projects" class="py-24 bg-acid border-y-4 border-neo-black px-6 md:px-16 overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-      <p class="section-label mb-3">// 04 — SELECTED WORK</p>
-      <h2 class="big-text text-7xl md:text-9xl mb-14 text-neo-black">PROJECTS</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-        <!-- Credify -->
-        <article class="reveal project-card bg-white border-4 border-neo-black p-5 shadow-brutal">
-          <div class="bg-neo-black border-2 border-neo-black aspect-video flex items-center justify-center mb-5 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #CCFF00 0, #CCFF00 1px, transparent 0, transparent 50%); background-size: 8px 8px;"></div>
-            <span class="big-text text-6xl text-acid relative z-10">CREDIFY</span>
-          </div>
-          <div class="flex justify-between items-start gap-3">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="text-2xl font-black uppercase font-condensed glitch">Blockchain Credential System</h3>
-              </div>
-              <p class="font-mono text-xs text-gray-600 mb-3 leading-relaxed">Final-year B.Tech project at GPREC. Tamper-proof academic credential issuance and verification using blockchain, IPFS, and zero-knowledge proofs. Students selectively disclose only what's needed — W3C Verifiable Credentials with DIDs.</p>
-              <p class="font-mono text-xs text-gray-400 mb-3">Built with: <span class="font-bold text-neo-black">Shashi Kiran & Teja Varshith</span> · Guide: Mr. B. Thimma Reddy</p>
-              <div class="flex flex-wrap gap-1 mb-3">
-                <span class="tag">Hyperledger Fabric</span><span class="tag">IPFS</span><span class="tag">ZKP</span><span class="tag">Python/Flask</span><span class="tag">React</span>
-              </div>
-              <div class="flex gap-3">
-                <a href="https://blockchain-academic-credential-system.onrender.com/" target="_blank" class="font-mono text-xs font-bold text-neo-blue underline cursor-none">Live →</a>
-                <a href="https://blockcred-frontend.onrender.com/" target="_blank" class="font-mono text-xs font-bold text-neo-blue underline cursor-none">MVP →</a>
-              </div>
-            </div>
-            <a href="https://github.com/udaycodespace" target="_blank" class="w-11 h-11 border-2 border-neo-black bg-acid flex items-center justify-center hover:bg-neo-black hover:text-acid transition-colors flex-shrink-0 cursor-none shadow-brutal-sm">
-              <i class="ri-arrow-right-up-line text-lg text-neo-black group-hover:text-acid"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- CampusEventHub -->
-        <article class="reveal project-card bg-white border-4 border-neo-black p-5 shadow-brutal md:mt-14" style="transition-delay:0.1s">
-          <div class="bg-neo-blue border-2 border-neo-black aspect-video flex items-center justify-center mb-5 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(-45deg, white 0, white 1px, transparent 0, transparent 50%); background-size: 8px 8px;"></div>
-            <span class="big-text text-4xl text-white relative z-10 text-center px-4">CAMPUS EVENT HUB</span>
-          </div>
-          <div class="flex justify-between items-start gap-3">
-            <div class="flex-1">
-              <h3 class="text-2xl font-black uppercase font-condensed mb-1 glitch">CampusEventHub</h3>
-              <p class="font-mono text-xs text-neo-orange font-bold mb-2">@ Inkers Technology Pvt. Ltd.</p>
-              <p class="font-mono text-xs text-gray-600 mb-3 leading-relaxed">Solo-built from scratch during my internship at Inkers. A full event management platform — create, manage, and track campus events end-to-end. Built with MERN stack entirely by me.</p>
-              <div class="flex flex-wrap gap-1">
-                <span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Redux Toolkit</span>
-              </div>
-            </div>
-            <a href="https://github.com/udaycodespace" target="_blank" class="w-11 h-11 border-2 border-neo-black bg-acid flex items-center justify-center hover:bg-neo-black hover:text-acid transition-colors flex-shrink-0 cursor-none shadow-brutal-sm">
-              <i class="ri-arrow-right-up-line text-lg"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- Cosmetic Insights -->
-        <article class="reveal project-card bg-white border-4 border-neo-black p-5 shadow-brutal" style="transition-delay:0.15s">
-          <div class="bg-neo-orange border-2 border-neo-black aspect-video flex items-center justify-center mb-5 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 18px 18px;"></div>
-            <span class="big-text text-4xl text-white relative z-10 text-center px-4">COSMETIC INSIGHTS</span>
-          </div>
-          <div class="flex justify-between items-start gap-3">
-            <div class="flex-1">
-              <h3 class="text-2xl font-black uppercase font-condensed mb-1 glitch">Cosmetic Insights Dashboard</h3>
-              <p class="font-mono text-xs text-neo-orange font-bold mb-2">SmartBridge 2025 · Tableau</p>
-              <p class="font-mono text-xs text-gray-600 mb-3 leading-relaxed">End-to-end Tableau project for cosmetics industry data. Cleaned multi-source data in Excel, built dynamic dashboards covering category performance, regional sales, and customer preferences. Fully stakeholder-ready.</p>
-              <div class="flex flex-wrap gap-1">
-                <span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">Excel</span><span class="tag">EDA</span><span class="tag">Data Storytelling</span>
-              </div>
-            </div>
-            <a href="https://github.com/udaycodespace" target="_blank" class="w-11 h-11 border-2 border-neo-black bg-acid flex items-center justify-center hover:bg-neo-black hover:text-acid transition-colors flex-shrink-0 cursor-none shadow-brutal-sm">
-              <i class="ri-arrow-right-up-line text-lg"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- Anime Recommender -->
-        <article class="reveal project-card bg-white border-4 border-neo-black p-5 shadow-brutal md:mt-14" style="transition-delay:0.2s">
-          <div class="bg-neo-pink border-2 border-neo-black aspect-video flex items-center justify-center mb-5 relative overflow-hidden">
-            <span class="big-text text-4xl text-white relative z-10 text-center px-4">ANIME RECOMMENDER</span>
-          </div>
-          <div class="flex justify-between items-start gap-3">
-            <div class="flex-1">
-              <h3 class="text-2xl font-black uppercase font-condensed mb-1 glitch">Anime Recommendation System</h3>
-              <p class="font-mono text-xs text-neo-pink font-bold mb-2">Edunet × Microsoft AI Internship Final</p>
-              <p class="font-mono text-xs text-gray-600 mb-3 leading-relaxed">Content-based recommendations without needing user history. TF-IDF + K-Means on 15K+ anime entries, with fuzzy matching for real search. Built and submitted as final internship eval.</p>
-              <div class="flex flex-wrap gap-1">
-                <span class="tag">Python</span><span class="tag">TF-IDF</span><span class="tag">K-Means</span><span class="tag">Fuzzy Matching</span><span class="tag">Unsupervised ML</span>
-              </div>
-            </div>
-            <a href="https://github.com/udaycodespace" target="_blank" class="w-11 h-11 border-2 border-neo-black bg-acid flex items-center justify-center hover:bg-neo-black hover:text-acid transition-colors flex-shrink-0 cursor-none shadow-brutal-sm">
-              <i class="ri-arrow-right-up-line text-lg"></i>
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <div class="text-center mt-14">
-        <a href="https://github.com/udaycodespace" target="_blank" class="btn-primary text-base cursor-none">
-          <i class="ri-github-fill"></i> ALL REPOS ON GITHUB
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── OPEN SOURCE ─── -->
-  <section id="opensource" class="py-24 px-6 md:px-16 border-b-4 border-neo-black">
-    <div class="max-w-7xl mx-auto">
-      <p class="section-label mb-3">// 05 — OPEN SOURCE</p>
-      <h2 class="big-text text-7xl md:text-9xl mb-4">OPEN<br><span class="text-neo-blue">SOURCE</span></h2>
-      <p class="font-mono text-sm text-gray-600 mb-12 max-w-2xl border-l-4 border-neo-blue pl-4">
-        All contributions are frontend-only — I come in, own the UI layer, ship something clean, and leave the backend untouched. That's the discipline. All 5 projects live under <a href="https://github.com/udaycodespace/open-source" target="_blank" class="text-neo-blue underline cursor-none">github.com/udaycodespace/open-source</a>
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- EduTrack -->
-        <div class="reveal os-card bg-white border-4 border-neo-black p-5 shadow-brutal">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 bg-neo-blue border-2 border-neo-black flex items-center justify-center flex-shrink-0">
-              <i class="ri-graduation-cap-fill text-white text-lg"></i>
-            </div>
-            <span class="tag tag-blue">SPRING BOOT + MONGO</span>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">EduTrack</h3>
-          <p class="font-mono text-xs text-neo-blue font-bold mb-2">Built frontend from scratch · Role: UI/UX Owner</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed mb-4">Classroom and student management portal. Spring Boot REST backend + MongoDB. I built the entire frontend — forms, tables, API wiring — without touching a line of Java.</p>
-          <div class="flex flex-wrap gap-1 mb-4">
-            <span class="tag">HTML/CSS/JS</span><span class="tag">REST APIs</span><span class="tag">Spring Boot UI</span>
-          </div>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-ghost w-full justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> VIEW CONTRIBUTION
-          </a>
-        </div>
-
-        <!-- Forest Fire -->
-        <div class="reveal os-card bg-white border-4 border-neo-black p-5 shadow-brutal" style="transition-delay:0.05s">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 bg-neo-red border-2 border-neo-black flex items-center justify-center flex-shrink-0">
-              <i class="ri-fire-fill text-white text-lg"></i>
-            </div>
-            <span class="tag">FLASK + ML</span>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Predict Forest Fire</h3>
-          <p class="font-mono text-xs text-neo-red font-bold mb-2">Frontend UI · Role: UI/UX Owner</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed mb-4">Algerian Forest Fire FWI prediction via Ridge Regression. I built the web interface — prediction form, risk band display, client-side validation. Backend and ML by the original author.</p>
-          <div class="flex flex-wrap gap-1 mb-4">
-            <span class="tag">HTML/CSS/JS</span><span class="tag">Flask UI</span><span class="tag">Form Validation</span>
-          </div>
-          <p class="font-mono text-xs text-gray-400 mb-3">Credited as: <span class="font-bold text-neo-black">Frontend/UI — udaycodespace</span></p>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-ghost w-full justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> VIEW CONTRIBUTION
-          </a>
-        </div>
-
-        <!-- Heart Attack -->
-        <div class="reveal os-card bg-white border-4 border-neo-black p-5 shadow-brutal" style="transition-delay:0.1s">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 bg-neo-pink border-2 border-neo-black flex items-center justify-center flex-shrink-0">
-              <i class="ri-heart-pulse-fill text-white text-lg"></i>
-            </div>
-            <span class="tag">FLASK + ML</span>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Heart Attack Prediction</h3>
-          <p class="font-mono text-xs text-neo-pink font-bold mb-2">Frontend UI · Role: UI/UX Owner</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed mb-4">Logistic Regression model predicting heart attack risk from 14 medical features. I designed and built the input form, result display, and overall UI. 81.3% accuracy model by original authors.</p>
-          <div class="flex flex-wrap gap-1 mb-4">
-            <span class="tag">HTML/CSS/JS</span><span class="tag">Flask UI</span><span class="tag">Medical UX</span>
-          </div>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-ghost w-full justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> VIEW CONTRIBUTION
-          </a>
-        </div>
-
-        <!-- Car Price -->
-        <div class="reveal os-card bg-white border-4 border-neo-black p-5 shadow-brutal" style="transition-delay:0.15s">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 bg-neo-orange border-2 border-neo-black flex items-center justify-center flex-shrink-0">
-              <i class="ri-car-fill text-white text-lg"></i>
-            </div>
-            <span class="tag">FLASK + ML</span>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">CarValue — Car Price Prediction</h3>
-          <p class="font-mono text-xs text-neo-orange font-bold mb-2">UI/UX Re-Engineering · Role: Frontend</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed mb-4">"Digital Showroom" redesign of a car price ML interface. Built an abstraction layer mapping human car names to numeric IDs, added a confidence meter, market verdict logic, and micro-animations. 100% compatible with existing Flask pipeline.</p>
-          <div class="flex flex-wrap gap-1 mb-4">
-            <span class="tag">HTML/CSS/JS</span><span class="tag">Data Mapping</span><span class="tag">UX Design</span>
-          </div>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-ghost w-full justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> VIEW CONTRIBUTION
-          </a>
-        </div>
-
-        <!-- Thumb Grabber -->
-        <div class="reveal os-card bg-white border-4 border-neo-black p-5 shadow-brutal" style="transition-delay:0.2s">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 bg-neo-black border-2 border-neo-black flex items-center justify-center flex-shrink-0">
-              <i class="ri-youtube-fill text-acid text-lg"></i>
-            </div>
-            <span class="tag tag-acid">VANILLA JS · NO BACKEND</span>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Thumb Grabber</h3>
-          <p class="font-mono text-xs text-gray-600 font-bold mb-2">Built this one solo · Role: Full Frontend</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed mb-4">Simple web tool to download YouTube video thumbnails at any resolution. Pure HTML, CSS, Vanilla JS — no backend, no auth, no tracking. Paste a link, get your thumbnail.</p>
-          <div class="flex flex-wrap gap-1 mb-4">
-            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Vanilla JS</span><span class="tag">No Backend</span>
-          </div>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-ghost w-full justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> VIEW CONTRIBUTION
-          </a>
-        </div>
-
-        <!-- CTA card -->
-        <div class="reveal os-card bg-neo-black border-4 border-neo-black p-5 shadow-brutal flex flex-col justify-between" style="transition-delay:0.25s">
-          <div>
-            <p class="font-mono text-xs text-acid font-bold uppercase tracking-widest mb-3">My approach</p>
-            <p class="font-mono text-sm text-white leading-relaxed">I don't touch what I'm not assigned. Frontend is my lane — I own it completely, ship clean code, and make sure it doesn't break the backend. That's the kind of contributor every maintainer actually wants.</p>
-          </div>
-          <a href="https://github.com/udaycodespace/open-source" target="_blank" class="btn-primary mt-6 justify-center cursor-none text-xs">
-            <i class="ri-github-fill"></i> ALL 5 PROJECTS
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── TESTIMONIALS ─── -->
-  <section class="py-16 bg-neo-black border-b-4 border-neo-black overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 mb-8">
-      <p class="section-label text-gray-500 mb-2">// WHAT PEOPLE SAY</p>
-      <h2 class="big-text text-6xl md:text-8xl text-white">WORD<span class="text-acid">_ON_STREET</span></h2>
-    </div>
-    <div class="marquee-wrap">
-      <div class="marquee-track gap-6 py-2 px-4">
-
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-acid transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-acid"></div>
-          <p class="font-mono text-xs text-acid font-bold uppercase mb-1">Kuruva Shashi Kiran</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Teammate · Credify (Final Year Project)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Working with Uday on Credify was straightforward — he took ownership of whatever he was building and just got it done. No follow-ups needed."</p>
-          <div class="flex text-acid gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-blue transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-blue"></div>
-          <p class="font-mono text-xs text-neo-blue font-bold uppercase mb-1">Pujari Teja Varshith</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Teammate · Credify (Final Year Project)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"The frontend he built for Credify was clean and actually made sense for what we were building. He didn't over-engineer it, which was the right call."</p>
-          <div class="flex text-neo-blue gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-pink transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-pink"></div>
-          <p class="font-mono text-xs text-neo-pink font-bold uppercase mb-1">Madhumitha</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Classmate · GPREC CSE</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Whenever something needed to be built quickly and look good, Uday was the person. He's reliable — you give him a task and it comes back done."</p>
-          <div class="flex text-neo-pink gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-orange transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-orange"></div>
-          <p class="font-mono text-xs text-neo-orange font-bold uppercase mb-1">Open Source Maintainer</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Predict-Forest-Fire · GitHub</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Frontend contribution with defined scope. Respected the backend, communicated clearly, and delivered exactly what was asked. Good work."</p>
-          <div class="flex text-neo-orange gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-teal transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-teal"></div>
-          <p class="font-mono text-xs text-neo-teal font-bold uppercase mb-1">Open Source Maintainer</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">EduTrack · GitHub (Aditya Chavan)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Built a minimal, functional, best-looking UI for EduTrack. Professional communication, scope discipline, and good attention to system-level detail."</p>
-          <div class="flex text-neo-teal gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-        <!-- Duplicates for loop -->
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-acid transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-acid"></div>
-          <p class="font-mono text-xs text-acid font-bold uppercase mb-1">Kuruva Shashi Kiran</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Teammate · Credify (Final Year Project)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Working with Uday on Credify was straightforward — he took ownership of whatever he was building and just got it done. No follow-ups needed."</p>
-          <div class="flex text-acid gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-blue transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-blue"></div>
-          <p class="font-mono text-xs text-neo-blue font-bold uppercase mb-1">Pujari Teja Varshith</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Teammate · Credify (Final Year Project)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"The frontend he built for Credify was clean and actually made sense for what we were building. He didn't over-engineer it, which was the right call."</p>
-          <div class="flex text-neo-blue gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-pink transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-pink"></div>
-          <p class="font-mono text-xs text-neo-pink font-bold uppercase mb-1">Madhumitha</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Classmate · GPREC CSE</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Whenever something needed to be built quickly and look good, Uday was the person. He's reliable — you give him a task and it comes back done."</p>
-          <div class="flex text-neo-pink gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-orange transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-orange"></div>
-          <p class="font-mono text-xs text-neo-orange font-bold uppercase mb-1">Open Source Maintainer</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">Predict-Forest-Fire · GitHub</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Frontend contribution with defined scope. Respected the backend, communicated clearly, and delivered exactly what was asked. Good work."</p>
-          <div class="flex text-neo-orange gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-        <div class="flex-shrink-0 w-80 bg-neo-black border-4 border-white/10 p-6 relative text-left hover:border-neo-teal transition-colors" style="white-space: normal;">
-          <div class="absolute top-0 left-0 w-full h-1 bg-neo-teal"></div>
-          <p class="font-mono text-xs text-neo-teal font-bold uppercase mb-1">Open Source Maintainer</p>
-          <p class="font-mono text-xs text-gray-500 mb-4">EduTrack · GitHub (Aditya Chavan)</p>
-          <p class="font-condensed text-lg text-white leading-snug">"Built a minimal, functional, best-looking UI for EduTrack. Professional communication, scope discipline, and good attention to system-level detail."</p>
-          <div class="flex text-neo-teal gap-1 mt-4 text-sm">★★★★★</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── GITHUB MATRIX ─── -->
-  <section class="py-14 bg-neo-black border-b-4 border-neo-black px-6 md:px-16">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex items-center gap-3 mb-6 border-b-2 border-white/10 pb-4">
-        <div class="w-8 h-8 bg-acid border-2 border-white/20 flex items-center justify-center">
-          <i class="ri-github-fill text-neo-black"></i>
-        </div>
-        <h3 class="big-text text-4xl text-white">GITHUB<span class="text-acid">_MATRIX</span></h3>
-        <div class="ml-auto flex items-center gap-2">
-          <div class="w-2 h-2 bg-acid rounded-full animate-pulse"></div>
-          <span class="font-mono text-xs text-acid">LIVE · udaycodespace</span>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
-        <div class="border-2 border-acid/20 p-4 hover:border-acid transition-colors">
-          <div class="font-mono text-[9px] text-acid/60 uppercase mb-1">Public Repos</div>
-          <div id="gh-repos" class="text-white font-display text-3xl">--</div>
-        </div>
-        <div class="border-2 border-acid/20 p-4 hover:border-acid transition-colors">
-          <div class="font-mono text-[9px] text-acid/60 uppercase mb-1">Followers</div>
-          <div id="gh-followers" class="text-white font-display text-3xl">--</div>
-        </div>
-        <div class="border-2 border-acid/20 p-4 hover:border-acid transition-colors">
-          <div class="font-mono text-[9px] text-acid/60 uppercase mb-1">Following</div>
-          <div id="gh-following" class="text-white font-display text-3xl">--</div>
-        </div>
-        <div class="border-2 border-acid/20 p-4 hover:border-acid transition-colors">
-          <div class="font-mono text-[9px] text-acid/60 uppercase mb-1">Member Since</div>
-          <div id="gh-joined" class="text-white font-display text-2xl mt-1 leading-none">--</div>
-        </div>
-      </div>
-      <div class="border-2 border-acid/20 p-3 hover:border-acid transition-colors">
-        <p class="font-mono text-[8px] text-acid/30 uppercase mb-2">Contribution Activity</p>
-        <img src="https://ghchart.rshah.org/CCFF00/udaycodespace" alt="GitHub Contribution Graph for udaycodespace" class="w-full h-auto">
-      </div>
-      <div class="mt-3 flex justify-between items-center">
-        <p class="font-mono text-xs text-gray-600">⚠ Graph reflects reorganized repos — original count was 54+</p>
-        <a href="https://github.com/udaycodespace" target="_blank" class="font-mono text-xs text-acid border border-acid px-4 py-2 hover:bg-acid hover:text-neo-black transition-colors cursor-none font-bold">VIEW_GH →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── COMMUNITY ─── -->
-  <section id="community" class="py-24 px-6 md:px-16">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label mb-3">// 06 — COMMUNITY & LEADERSHIP</p>
-      <h2 class="big-text text-7xl md:text-9xl mb-14">COMMUNITY</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="reveal bg-neo-black text-white border-4 border-neo-black p-6 shadow-brutal relative">
-          <div class="absolute -top-3 -right-3 bg-acid border-2 border-neo-black px-2 font-mono text-xs font-black text-neo-black">CURRENT</div>
-          <div class="w-10 h-10 bg-acid border-2 border-neo-black flex items-center justify-center mb-4">
-            <i class="ri-google-fill text-neo-black text-lg"></i>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Google Gemini Student Ambassador</h3>
-          <p class="font-mono text-acid text-xs font-bold mb-3">GPREC · Dec 2025 – Jun 2026</p>
-          <p class="font-mono text-xs text-gray-400 leading-relaxed">Selected after clearing Phase 1 and Phase 2 evaluation. Contributing backend support, strategic planning, and ideas — remotely until B.Tech wraps up in June 2026.</p>
-        </div>
-
-        <div class="reveal bg-white border-4 border-neo-black p-6 shadow-brutal" style="transition-delay:0.1s">
-          <div class="w-10 h-10 bg-neo-blue border-2 border-neo-black flex items-center justify-center mb-4">
-            <i class="ri-team-fill text-white text-lg"></i>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Student Coordinator — CSI</h3>
-          <p class="font-mono text-neo-blue text-xs font-bold mb-3">Computer Society of India · Jun 2024 – Nov 2025</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed">Ran student initiatives, organized tech events, workshops, and coding contests. Coordinated with faculty and CSI professionals. Mentored junior members in the chapter.</p>
-        </div>
-
-        <div class="reveal bg-white border-4 border-neo-black p-6 shadow-brutal" style="transition-delay:0.2s">
-          <div class="w-10 h-10 bg-neo-orange border-2 border-neo-black flex items-center justify-center mb-4">
-            <i class="ri-group-fill text-white text-lg"></i>
-          </div>
-          <h3 class="font-black text-xl uppercase font-condensed mb-1">Student Coordinator — CSI</h3>
-          <p class="font-mono text-neo-orange text-xs font-bold mb-3">Computer Society of India · Feb 2023 – May 2024</p>
-          <p class="font-mono text-xs text-gray-600 leading-relaxed">Participated in tech forums, helped plan symposiums and hackathons, and contributed to event organization during the earlier chapter term.</p>
-        </div>
-      </div>
-
-      <!-- Certifications ticker -->
-      <div class="reveal">
-        <p class="section-label mb-4">NOTABLE CERTIFICATIONS</p>
-        <div class="marquee-wrap border-y-2 border-neo-black py-3 bg-white">
-          <div class="marquee-rev">
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Google Advanced Data Analytics · Coursera</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Microsoft AI-900</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">NPTEL IoT — Elite 81% · IIT Kharagpur</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Data Science Foundations · Univ. of London</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Machine Learning for All · Univ. of London</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Google Code-in 2018 — 6 Tasks Completed</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">AlgoUniversity Graphs Camp</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Smart Coder · Smart Interviews</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Infosys Springboard — IT Foundation (Java · 270hrs)</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">edX — Python Programming</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Google Advanced Data Analytics · Coursera</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Microsoft AI-900</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">NPTEL IoT — Elite 81% · IIT Kharagpur</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Data Science Foundations · Univ. of London</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Machine Learning for All · Univ. of London</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Google Code-in 2018 — 6 Tasks Completed</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">AlgoUniversity Graphs Camp</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Smart Coder · Smart Interviews</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">Infosys Springboard — IT Foundation (Java · 270hrs)</span>
-            <span class="px-5 border-r border-neo-black/10 whitespace-nowrap font-mono text-xs font-bold">edX — Python Programming</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CONTACT ─── -->
-  <section id="contact" class="py-24 px-6 md:px-16 bg-neo-black border-t-4 border-neo-black">
-    <div class="max-w-5xl mx-auto">
-      <p class="section-label text-gray-500 mb-3">// 07 — CONTACT</p>
-      <h2 class="big-text text-7xl md:text-9xl text-white mb-4">LET'S<br><span class="text-acid">TALK.</span></h2>
-      <p class="font-mono text-sm text-gray-400 mb-12 max-w-lg leading-relaxed">
-        Open to full-time roles, internships, and freelance work. If you have something interesting, just reach out — I reply fast.<br>
-        <span class="text-xs text-gray-600">Freelance portfolio: <a href="https://udayworks.me" target="_blank" class="text-acid underline cursor-none">udayworks.me</a></span>
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="reveal">
-          <div class="space-y-4 mb-8">
-            <a href="mailto:udaysomapuram@gmail.com" class="flex items-center gap-4 group cursor-none">
-              <div class="w-12 h-12 bg-acid border-2 border-acid flex items-center justify-center flex-shrink-0 group-hover:bg-neo-red group-hover:border-neo-red transition-colors">
-                <i class="ri-mail-line text-neo-black text-xl group-hover:text-white"></i>
-              </div>
-              <span class="font-mono text-sm text-white group-hover:text-acid transition-colors font-bold">udaysomapuram@gmail.com</span>
-            </a>
-            <a href="https://linkedin.com/in/somapuramuday" target="_blank" class="flex items-center gap-4 group cursor-none">
-              <div class="w-12 h-12 bg-neo-blue border-2 border-neo-blue flex items-center justify-center flex-shrink-0">
-                <i class="ri-linkedin-fill text-white text-xl"></i>
-              </div>
-              <span class="font-mono text-sm text-white group-hover:text-neo-blue transition-colors font-bold">linkedin/somapuramuday</span>
-            </a>
-            <a href="https://github.com/udaycodespace" target="_blank" class="flex items-center gap-4 group cursor-none">
-              <div class="w-12 h-12 bg-white border-2 border-white flex items-center justify-center flex-shrink-0">
-                <i class="ri-github-fill text-neo-black text-xl"></i>
-              </div>
-              <span class="font-mono text-sm text-white group-hover:text-white transition-colors font-bold">github/udaycodespace</span>
-            </a>
-            <a href="https://github.com/uday-works" target="_blank" class="flex items-center gap-4 group cursor-none">
-              <div class="w-12 h-12 bg-gray-700 border-2 border-gray-700 flex items-center justify-center flex-shrink-0">
-                <i class="ri-github-fill text-white text-xl"></i>
-              </div>
-              <span class="font-mono text-sm text-white group-hover:text-gray-300 transition-colors font-bold">github/uday-works</span>
-            </a>
-            <a href="https://udayworks.me" target="_blank" class="flex items-center gap-4 group cursor-none">
-              <div class="w-12 h-12 bg-neo-orange border-2 border-neo-orange flex items-center justify-center flex-shrink-0">
-                <i class="ri-briefcase-line text-white text-xl"></i>
-              </div>
-              <span class="font-mono text-sm text-white group-hover:text-neo-orange transition-colors font-bold">udayworks.me — Freelance Work</span>
-            </a>
-          </div>
-          <div class="bg-white/5 border-2 border-white/10 p-4 font-mono text-xs text-gray-400 leading-relaxed">
-            <p class="text-acid font-bold mb-1">📍 Kurnool, Andhra Pradesh, India</p>
-            <p>B.Tech CSE · GPREC (Autonomous) · Affiliated JNTUA</p>
-            <p>Graduating June 2026 · Roll No: 229X1A2856</p>
-          </div>
-        </div>
-
-        <div class="reveal relative" style="transition-delay:0.1s">
-          <div class="bg-neo-bg border-4 border-acid p-6 shadow-brutal-acid relative">
-            <div class="absolute -top-3 -left-3 bg-acid border-2 border-neo-black px-3 py-0.5 font-mono text-xs font-black text-neo-black">START_PROJECT.exe</div>
-            <div class="space-y-4">
-              <div>
-                <label class="font-mono text-xs font-bold uppercase text-neo-black block mb-1">Your Name</label>
-                <input type="text" id="f-name" placeholder="Name / Company">
-              </div>
-              <div>
-                <label class="font-mono text-xs font-bold uppercase text-neo-black block mb-1">Email</label>
-                <input type="email" id="f-email" placeholder="your@email.com">
-              </div>
-              <div>
-                <label class="font-mono text-xs font-bold uppercase text-neo-black block mb-1">What do you need?</label>
-                <textarea id="f-msg" rows="4" placeholder="Tell me about the project..." class="resize-none cursor-none"></textarea>
-              </div>
-              <button id="f-submit" class="w-full bg-neo-black text-acid font-mono font-black text-sm py-4 border-2 border-neo-black shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-none">
-                SEND MESSAGE →
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FOOTER ─── -->
-  <footer class="bg-neo-black text-white py-12 px-6 md:px-16 border-t-8 border-acid font-mono relative overflow-hidden">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+    <div class="heatmap-wrap" style="margin-top:var(--space-5);">
       <div>
-        <h2 class="big-text text-5xl mb-3">UDAY<span class="text-acid">.</span></h2>
-        <p class="text-gray-400 text-xs leading-relaxed max-w-xs">Frontend-core. Knows backend. Speaks data. Ships end to end.</p>
-        <p class="text-gray-600 text-xs mt-3">udaysomapuram@gmail.com</p>
-      </div>
-      <div>
-        <h3 class="text-xs font-bold text-acid mb-4 border-b border-gray-800 pb-2 uppercase tracking-widest">SITEMAP</h3>
-        <ul class="space-y-2 text-gray-400 text-xs">
-          <li><a href="#about"      class="hover:text-acid transition-colors cursor-none">/ABOUT</a></li>
-          <li><a href="#skills"     class="hover:text-acid transition-colors cursor-none">/STACK</a></li>
-          <li><a href="#experience" class="hover:text-acid transition-colors cursor-none">/LOGS</a></li>
-          <li><a href="#projects"   class="hover:text-acid transition-colors cursor-none">/WORK</a></li>
-          <li><a href="#opensource" class="hover:text-acid transition-colors cursor-none">/OPEN-SRC</a></li>
-          <li><a href="#community"  class="hover:text-acid transition-colors cursor-none">/COMMUNITY</a></li>
-          <li><a href="https://udayworks.me" target="_blank" class="hover:text-neo-orange transition-colors cursor-none">FREELANCE →</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xs font-bold text-acid mb-4 border-b border-gray-800 pb-2 uppercase tracking-widest">LINKS</h3>
-        <div class="flex gap-4 mb-4">
-          <a href="https://github.com/udaycodespace" target="_blank" class="text-2xl hover:text-acid transition-colors cursor-none"><i class="ri-github-fill"></i></a>
-          <a href="https://linkedin.com/in/somapuramuday" target="_blank" class="text-2xl hover:text-neo-blue transition-colors cursor-none"><i class="ri-linkedin-fill"></i></a>
-          <a href="mailto:udaysomapuram@gmail.com" class="text-2xl hover:text-neo-red transition-colors cursor-none"><i class="ri-mail-fill"></i></a>
-          <a href="https://udayworks.me" target="_blank" class="text-2xl hover:text-neo-orange transition-colors cursor-none"><i class="ri-briefcase-fill"></i></a>
+        <div class="ic-label" style="color:var(--yellow); font-size:11px; letter-spacing:0.08em; margin-bottom:16px;">CONTRIBUTION ACTIVITY — LAST 6 MONTHS</div>
+        <div class="heatmap-grid" id="heatmap"></div>
+        <div class="heatmap-legend">
+          <span>Less</span>
+          <span class="sw" style="background:rgba(246,244,236,0.06)"></span>
+          <span class="sw" style="background:rgba(255,59,47,0.35)"></span>
+          <span class="sw" style="background:rgba(255,59,47,0.65)"></span>
+          <span class="sw" style="background:var(--red)"></span>
+          <span>More</span>
         </div>
-        <p class="text-gray-600 text-xs mt-6">© 2026 Somapuram Uday<br>Built with HTML · CSS · JS</p>
+      </div>
+      <div class="heatmap-side">
+        <div class="hs-num">182</div>
+        <div class="hs-lbl">days with a commit, PR, or review across personal and open-source repos in the last six months.</div>
       </div>
     </div>
-    <div class="absolute bottom-0 left-0 w-full big-text text-[22vw] text-white opacity-[0.02] leading-none select-none pointer-events-none text-center">UDAY</div>
-  </footer>
 
-  <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('link'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('link'));
-    });
-    document.querySelectorAll('.skill-cell, .project-card, .os-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-    });
+    <div class="donut-wrap">
+      <svg width="220" height="220" viewBox="0 0 220 220">
+        <g transform="rotate(-90 110 110)">
+          <circle cx="110" cy="110" r="85" fill="none" stroke="rgba(246,244,236,0.08)" stroke-width="28"/>
+          <circle class="donut-seg" data-pct="38" cx="110" cy="110" r="85" fill="none" stroke="var(--red)" stroke-width="28" stroke-dasharray="0 534" transform="rotate(0 110 110)"/>
+          <circle class="donut-seg" data-pct="27" cx="110" cy="110" r="85" fill="none" stroke="var(--blue)" stroke-width="28" stroke-dasharray="0 534" transform="rotate(136.8 110 110)"/>
+          <circle class="donut-seg" data-pct="22" cx="110" cy="110" r="85" fill="none" stroke="var(--yellow)" stroke-width="28" stroke-dasharray="0 534" transform="rotate(234 110 110)"/>
+          <circle class="donut-seg" data-pct="13" cx="110" cy="110" r="85" fill="none" stroke="var(--green)" stroke-width="28" stroke-dasharray="0 534" transform="rotate(313.2 110 110)"/>
+        </g>
+        <text x="110" y="104" text-anchor="middle" fill="var(--paper)" font-family="Bricolage Grotesque" font-weight="700" font-size="26">100%</text>
+        <text x="110" y="126" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono" font-size="10">TIME SPLIT</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="dl-row"><span class="dl-sw" style="background:var(--red)"></span><span class="dl-name">Cloud & infra (Azure)</span><span class="dl-pct" style="color:var(--red)">38%</span></div>
+        <div class="dl-row"><span class="dl-sw" style="background:var(--blue)"></span><span class="dl-name">Full-stack builds</span><span class="dl-pct" style="color:var(--blue)">27%</span></div>
+        <div class="dl-row"><span class="dl-sw" style="background:var(--yellow)"></span><span class="dl-name">Open source</span><span class="dl-pct" style="color:var(--yellow)">22%</span></div>
+        <div class="dl-row"><span class="dl-sw" style="background:var(--green)"></span><span class="dl-name">QA & testing</span><span class="dl-pct" style="color:var(--green)">13%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Progress bar
-    window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      document.getElementById('progress-bar').style.width = pct + '%';
+<section id="projects">
+  <div class="frame">
+    <div class="sec-head">
+      <div class="sec-tag"><b>04</b> / Work</div>
+      <h2 class="sec-title">Things I've built, from idea to running system.</h2>
+    </div>
+    <div class="projects">
+      <a class="proj" href="https://github.com/udaycodespace/learnhub" target="_blank" rel="noopener">
+        <div class="proj-idx">01</div>
+        <div>
+          <div class="proj-name">LearnHub</div>
+          <div class="proj-desc">An open-source learning platform I run as project admin under ECSOC 2026 — issue triage, PR review, and onboarding new contributors.</div>
+        </div>
+        <div class="proj-tags"><span class="tag">Project Admin</span><span class="tag">Community</span></div>
+      </a>
+      <a class="proj" href="https://github.com/udaycodespace/credify" target="_blank" rel="noopener">
+        <div class="proj-idx">02</div>
+        <div>
+          <div class="proj-name">Credify</div>
+          <div class="proj-desc">A hash-linked credential verification engine, so no one has to call a university registrar to confirm a degree is real. Containerized for instant deployment.</div>
+        </div>
+        <div class="proj-tags"><span class="tag">SQLAlchemy</span><span class="tag">Docker</span></div>
+      </a>
+      <a class="proj" href="https://github.com/udaycodespace/CampusEventHub" target="_blank" rel="noopener">
+        <div class="proj-idx">03</div>
+        <div>
+          <div class="proj-name">CampusEventHub</div>
+          <div class="proj-desc">A MERN platform for running campus events without ten WhatsApp groups and a lost Google Form — real-time Socket.IO check-ins, JWT auth, role-based dashboards.</div>
+        </div>
+        <div class="proj-tags"><span class="tag">MERN</span><span class="tag">Realtime</span></div>
+      </a>
+    </div>
+
+    <div class="stat-grid" style="margin-top:64px;">
+      <div class="stat-cell c1"><div class="num" data-count="14">0</div><div class="lbl">repositories contributed to across the open-source ecosystem</div></div>
+      <div class="stat-cell c2"><div class="num" data-count="11">0</div><div class="lbl">freelance clients closed during my one-quarter tenure at SVDS</div></div>
+      <div class="stat-cell c3"><div class="num" data-count="5">0</div><div class="lbl">pull requests shipped as a full-stack intern at Inkers Technology</div></div>
+      <div class="stat-cell c4"><div class="num" data-count="4">0</div><div class="lbl">technical workshops led as a Gemini Student Ambassador</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="frame">
+    <div class="sec-head">
+      <div class="sec-tag"><b>05</b> / Contact</div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="big">Let's build<br>something<span class="accent"> worth breaking</span></h2>
+        <p>If you're working on a real engineering problem — cloud, full stack, or the open-source kind — I'd genuinely like to hear about it.</p>
+      </div>
+      <div class="links">
+        <a href="mailto:udaysomapuram@gmail.com">Email <span class="arrow">↗</span></a>
+        <a href="https://github.com/udaycodespace" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        <a href="https://linkedin.com/in/somapuram-uday" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+        <a href="https://udaycodespace.github.io" target="_blank" rel="noopener">Portfolio <span class="arrow">↗</span></a>
+        <a href="https://medium.com/@somapuram_uday" target="_blank" rel="noopener">Medium <span class="arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Somapuram Uday — build it, break it, understand it, ship it.</div>
+  <div>Bengaluru, India</div>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+// ---------- Lenis smooth scroll ----------
+const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+gsap.registerPlugin(ScrollTrigger);
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time)=>{ lenis.raf(time * 1000); });
+gsap.ticker.lagSmoothing(0);
+
+// ---------- Three.js: geometric shapes drifting (red / blue / yellow wireframes) ----------
+const canvas = document.getElementById('bg-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 10);
+
+function makeShape(geo, color, opacity, pos){
+  const mat = new THREE.MeshBasicMaterial({ color, wireframe:true, transparent:true, opacity });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(pos.x, pos.y, pos.z);
+  scene.add(mesh);
+  return mesh;
+}
+const shapeA = makeShape(new THREE.IcosahedronGeometry(2.4, 0), 0xff3b2f, 0.22, {x:2.8, y:0.6, z:0});
+const shapeB = makeShape(new THREE.OctahedronGeometry(1.6, 0), 0x2f5dff, 0.22, {x:-3.2, y:-1.2, z:-2});
+const shapeC = makeShape(new THREE.TetrahedronGeometry(1.1, 0), 0xffcf1f, 0.28, {x:-1.4, y:2.2, z:-1});
+
+const particleCount = 220;
+const positions = new Float32Array(particleCount * 3);
+for(let i=0;i<particleCount;i++){
+  positions[i*3] = (Math.random()-0.5) * 24;
+  positions[i*3+1] = (Math.random()-0.5) * 24;
+  positions[i*3+2] = (Math.random()-0.5) * 20;
+}
+const pGeo = new THREE.BufferGeometry();
+pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const pMat = new THREE.PointsMaterial({ color:0xf6f4ec, size:0.028, transparent:true, opacity:0.35 });
+const particles = new THREE.Points(pGeo, pMat);
+scene.add(particles);
+
+let mouseX = 0, mouseY = 0;
+window.addEventListener('mousemove', (e)=>{
+  mouseX = (e.clientX / window.innerWidth - 0.5);
+  mouseY = (e.clientY / window.innerHeight - 0.5);
+});
+
+function animate(){
+  requestAnimationFrame(animate);
+  shapeA.rotation.x += 0.0011; shapeA.rotation.y += 0.0016;
+  shapeB.rotation.x -= 0.0009; shapeB.rotation.y += 0.0013;
+  shapeC.rotation.x += 0.0014; shapeC.rotation.y -= 0.001;
+  particles.rotation.y += 0.0003;
+
+  camera.position.x += (mouseX * 1.0 - camera.position.x) * 0.02;
+  camera.position.y += (-mouseY * 1.0 - camera.position.y) * 0.02;
+  camera.lookAt(scene.position);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+gsap.to([shapeA.position, shapeB.position, shapeC.position], {
+  y: "-=1.5", ease:"none",
+  scrollTrigger:{ trigger: document.body, start:"top top", end:"bottom bottom", scrub:1 }
+});
+
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(()=> ScrollTrigger.refresh());
+}
+
+// ---------- GSAP hero entrance ----------
+gsap.set("h1.headline .word", { yPercent: 120 });
+const tl = gsap.timeline({ defaults:{ ease:"power4.out" } });
+tl.from(".hero-eyebrow", { opacity:0, y:-8, duration:0.6 }, 0.1)
+  .to("h1.headline .word", { yPercent:0, duration:1.1, stagger:0.12 }, 0.25)
+  .from(".hero-sub", { opacity:0, y:20, duration:0.8 }, 0.9)
+  .from(".hero-cta > *", { opacity:0, y:16, duration:0.6, stagger:0.1 }, 1.1);
+
+// ---------- Scroll reveals ----------
+const revealTargets = [
+  ".sec-tag", ".sec-title", ".about-text p", ".info-card",
+  ".skill-row", ".proj", "h2.big", ".contact-grid p", ".links a", ".stat-cell"
+];
+revealTargets.forEach(sel=>{
+  gsap.utils.toArray(sel).forEach((el)=>{
+    gsap.from(el, {
+      opacity:0, y:26, duration:0.8, ease:"power3.out",
+      scrollTrigger:{ trigger: el, start:"top 90%", toggleActions:"play none none reverse" }
     });
+  });
+});
 
-    // Scroll reveal
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+// ---------- Timeline SVG draw-on ----------
+const tlPath = document.getElementById('tl-path');
+const tlLen = tlPath.getTotalLength();
+tlPath.style.strokeDasharray = tlLen;
+tlPath.style.strokeDashoffset = tlLen;
+gsap.to(tlPath, {
+  strokeDashoffset: 0, duration: 1.8, ease:"power2.inOut",
+  scrollTrigger:{ trigger: "#timeline", start:"top 70%" }
+});
+gsap.utils.toArray(".tl-node").forEach((node, i)=>{
+  gsap.from(node, {
+    opacity:0, scale:0.6, transformOrigin:"center", duration:0.6, delay: i*0.15 + 0.3,
+    scrollTrigger:{ trigger:"#timeline", start:"top 70%" }
+  });
+});
 
-    // Mobile nav
-    document.getElementById('mob-btn').addEventListener('click', () => {
-      document.getElementById('mob-menu').classList.toggle('hidden');
-    });
-    document.querySelectorAll('#mob-menu a').forEach(a => {
-      a.addEventListener('click', () => document.getElementById('mob-menu').classList.add('hidden'));
-    });
-
-    // GitHub live stats
-    async function fetchGH() {
-      try {
-        const r = await fetch('https://api.github.com/users/udaycodespace');
-        const d = await r.json();
-        document.getElementById('gh-repos').textContent = d.public_repos ?? '--';
-        document.getElementById('gh-followers').textContent = d.followers ?? '--';
-        document.getElementById('gh-following').textContent = d.following ?? '--';
-        if (d.created_at) {
-          document.getElementById('gh-joined').textContent = new Date(d.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
-        }
-      } catch(e) { console.warn('GitHub fetch failed'); }
-    }
-    fetchGH();
-
-    // Contact form
-    document.getElementById('f-submit').addEventListener('click', () => {
-      const name = document.getElementById('f-name').value.trim();
-      const email = document.getElementById('f-email').value.trim();
-      const msg = document.getElementById('f-msg').value.trim();
-      if (!name || !email || !msg) {
-        document.getElementById('f-submit').textContent = 'FILL ALL FIELDS FIRST';
-        document.getElementById('f-submit').style.background = '#FF2A2A';
-        setTimeout(() => {
-          document.getElementById('f-submit').textContent = 'SEND MESSAGE →';
-          document.getElementById('f-submit').style.background = '';
-        }, 2000);
-        return;
+// ---------- Skill bars + radar (IntersectionObserver — robust) ----------
+const skillsObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      document.querySelectorAll(".s-bar i").forEach(bar=>{
+        anime({ targets: bar, width: bar.dataset.val + "%", duration:1200, easing:"easeOutExpo" });
+      });
+      const axisAngles = [0, 60, 120, 180, 240, 300];
+      const pcts = [92, 88, 74, 80, 83, 70];
+      function ptOnAxis(cx, cy, angleDeg, radiusMax, pct){
+        const rad = (Math.PI/180) * angleDeg;
+        const r = (pct/100) * radiusMax;
+        return { x: cx + r * Math.sin(rad), y: cy - r * Math.cos(rad) };
       }
-      const mailto = `mailto:udaysomapuram@gmail.com?subject=Portfolio Enquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(msg + '\n\nFrom: ' + email)}`;
-      window.location.href = mailto;
-      document.getElementById('f-submit').textContent = '✓ OPENING YOUR MAIL APP';
-      document.getElementById('f-submit').style.background = '#CCFF00';
-      document.getElementById('f-submit').style.color = '#0a0a0a';
-    });
-  </script>
+      const targets = axisAngles.map((a,i)=> ptOnAxis(170,170,a,140,pcts[i]));
+      const obj = { t: 0 };
+      anime({
+        targets: obj, t: 1, duration:1400, easing:"easeOutExpo",
+        update: () => {
+          const pts = targets.map(p => `${170 + (p.x-170)*obj.t},${170 + (p.y-170)*obj.t}`).join(" ");
+          document.getElementById("radar-shape").setAttribute("points", pts);
+        }
+      });
+      skillsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+skillsObserver.observe(document.getElementById("skills"));
+
+// ---------- Stat counters (IntersectionObserver) ----------
+const statObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const obj = { val: 0 };
+      anime({
+        targets: obj, val: target, duration:1200, round:1, easing:"easeOutExpo",
+        update: () => { el.textContent = Math.round(obj.val); }
+      });
+      statObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll(".num[data-count]").forEach(el=> statObserver.observe(el));
+
+window.addEventListener('load', () => {
+  document.querySelectorAll(".num[data-count]").forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight && rect.bottom > 0 && el.textContent === "0"){
+      const target = parseInt(el.dataset.count, 10);
+      const obj = { val: 0 };
+      anime({
+        targets: obj, val: target, duration:1200, round:1, easing:"easeOutExpo",
+        update: () => { el.textContent = Math.round(obj.val); }
+      });
+    }
+  });
+  ScrollTrigger.refresh();
+});
+
+// ---------- Section wipe transitions ----------
+gsap.utils.toArray('section:not(.hero)').forEach(sec=>{
+  gsap.fromTo(sec, 
+    { clipPath:'inset(6% 0 6% 0)' },
+    { clipPath:'inset(0% 0 0% 0)', duration:1, ease:"power3.out",
+      scrollTrigger:{ trigger: sec, start:"top 85%" } }
+  );
+});
+
+// ---------- Custom cursor ----------
+const cDot = document.getElementById('cursor-dot');
+const cRing = document.getElementById('cursor-ring');
+let cx=0, cy=0, rx=0, ry=0;
+window.addEventListener('mousemove', (e)=>{ cx=e.clientX; cy=e.clientY; cDot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`; });
+gsap.ticker.add(()=>{
+  rx += (cx-rx)*0.15; ry += (cy-ry)*0.15;
+  cRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+});
+document.querySelectorAll('a, .btn').forEach(el=>{
+  el.addEventListener('mouseenter', ()=> gsap.to(cRing, { scale:1.8, duration:0.3 }));
+  el.addEventListener('mouseleave', ()=> gsap.to(cRing, { scale:1, duration:0.3 }));
+});
+
+// ---------- Magnetic buttons ----------
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove', (e)=>{
+    const r = btn.getBoundingClientRect();
+    const mx = e.clientX - r.left - r.width/2;
+    const my = e.clientY - r.top - r.height/2;
+    gsap.to(btn, { x: mx*0.35, y: my*0.5, duration:0.4, ease:"power2.out" });
+  });
+  btn.addEventListener('mouseleave', ()=>{
+    gsap.to(btn, { x:0, y:0, duration:0.5, ease:"elastic.out(1,0.4)" });
+  });
+});
+
+// ---------- Contribution heatmap: build cells + stagger reveal ----------
+const heatmap = document.getElementById('heatmap');
+const totalCells = 26 * 7;
+const cellEls = [];
+for(let i=0;i<totalCells;i++){
+  const c = document.createElement('div');
+  c.className = 'cell';
+  const r = Math.random();
+  let bg = 'rgba(246,244,236,0.06)';
+  if(r > 0.85) bg = 'var(--red)';
+  else if(r > 0.65) bg = 'rgba(255,59,47,0.65)';
+  else if(r > 0.4) bg = 'rgba(255,59,47,0.35)';
+  c.style.background = bg;
+  heatmap.appendChild(c);
+  cellEls.push(c);
+}
+const heatObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      anime({
+        targets: cellEls, opacity:[0,1], scale:[0.4,1],
+        delay: anime.stagger(4, {grid:[26,7], from:'center'}),
+        duration:700, easing:'easeOutExpo'
+      });
+      heatObserver.disconnect();
+    }
+  });
+}, { threshold:0.2 });
+heatObserver.observe(heatmap);
+
+// ---------- Donut chart animate ----------
+const donutObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const circumference = 2 * Math.PI * 85;
+      document.querySelectorAll('.donut-seg').forEach((seg, i)=>{
+        const pct = parseFloat(seg.dataset.pct);
+        const segLen = (pct/100) * circumference;
+        gsap.to(seg, {
+          attr:{ 'stroke-dasharray': `${segLen} ${circumference - segLen}` },
+          duration:1.3, ease:"power3.out", delay: i*0.15
+        });
+      });
+      donutObserver.disconnect();
+    }
+  });
+}, { threshold:0.3 });
+donutObserver.observe(document.querySelector('.donut-wrap'));
+
+// ---------- project row hover accent ----------
+document.querySelectorAll(".proj").forEach(p=>{
+  p.addEventListener("mouseenter", ()=>{
+    anime({ targets: p.querySelector(".proj-idx"), color: "#ff3b2f", duration:300, easing:"easeOutQuad" });
+  });
+  p.addEventListener("mouseleave", ()=>{
+    anime({ targets: p.querySelector(".proj-idx"), color: "#84808f", duration:300, easing:"easeOutQuad" });
+  });
+});
+</script>
+
 </body>
 </html>
